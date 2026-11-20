@@ -24,7 +24,7 @@ jobs:
           node-version: "20"
       - run: npm install
       - run: npm test
-      - run: node --check src/server.js && node --check src/routes.js
+      - run: node --check src/server.js && node --check src/routes.js && node --check src/content.js
 
   android:
     name: Build and test Android APK
