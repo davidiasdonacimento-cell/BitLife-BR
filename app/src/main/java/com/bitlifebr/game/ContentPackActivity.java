@@ -65,8 +65,8 @@ public final class ContentPackActivity extends Activity {
     @Override protected void onDestroy(){handler.removeCallbacks(pollTask);if(pulse!=null)pulse.cancel();super.onDestroy();}
 
     private void buildScreen(){
-        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);scroll.setBackgroundColor(BG);
-        LinearLayout root=new LinearLayout(this);root.setOrientation(1);root.setPadding(dp(22),dp(28),dp(22),dp(30));
+        ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);scroll.setClipToPadding(false);scroll.setPadding(0,0,0,dp(24));scroll.setBackgroundColor(BG);
+        LinearLayout root=new LinearLayout(this);root.setOrientation(1);root.setPadding(dp(22),dp(16),dp(22),dp(64));
         TextView heading=text("CENTRAL DE CONTEÚDO",24,TEXT);heading.setTypeface(Typeface.DEFAULT,Typeface.BOLD);root.addView(heading,match());
         TextView sub=text("Instale os dados e recursos oficiais do BitLife BR.",14,MUTED);sub.setPadding(0,dp(7),0,dp(19));root.addView(sub,match());
         LinearLayout hero=new LinearLayout(this);hero.setGravity(Gravity.CENTER);hero.setOrientation(1);hero.setPadding(dp(18),dp(24),dp(18),dp(24));hero.setBackground(round(PANEL,18));
