@@ -1,0 +1,18 @@
+import express from "express";
+import helmet from "helmet";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import { migrate } from "./db.js";
+import { router } from "./routes.js";
+const app=express();
+app.disable("x-powered-by");
+app.use(helmet());
+app.use(cors({origin:process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : false}));
+app.use(express.json({limit:"256kb"}));
+app.use("/api",rateLimit({windowMs:15*60*1000,limit:300,standardHeaders:true,legacyHeaders:false}));
+app.get("/health",(_req,res)=>res.json({ok:true,service:"bitlife-br-api"}));
+app.use("/api",router);
+app.use((err,_req,res,_next)=>{console.error(err);res.status(500).json({error:"Erro interno. Tente novamente."});});
+const port=Number(process.env.PORT||3000);
+await migrate();
+app.listen(port,"0.0.0.0",()=>console.log(`BitLife BR API listening on ${port}`));
