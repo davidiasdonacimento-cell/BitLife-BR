@@ -51,3 +51,8 @@ O workflow `.github/workflows/android-build.yml` executa testes do servidor, tes
 - Não sobrescrever saves desatualizados sem resolução de conflitos.
 - Manter o histórico de decisões.
 - Implementar NPCs e eventos com dados e regras reais, não placeholders apresentados como recursos prontos.
+
+
+### Expansão de conteúdo v2
+
+O Content Pack v2 recuperado contém 20.000 eventos com três escolhas e efeitos por opção, além dos catálogos de atividades, carreiras, economia, família, moradias, veículos e personalidades e quatro animações vetoriais. O catálogo pequeno dentro do APK é apenas fallback; os eventos expandidos são lidos de `catalogs/events.json` após a instalação do pacote. O cliente agora aplica os efeitos numéricos definidos em cada escolha do pacote, em vez de substituir todos por efeitos genéricos por categoria.
