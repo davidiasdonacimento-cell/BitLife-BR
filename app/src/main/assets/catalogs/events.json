@@ -1438,5 +1438,293 @@
         "effect": "wellbeing"
       }
     ]
+  },
+  {
+    "id": "familia_07",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Uma receita de família",
+    "description": "Um familiar encontrou uma receita antiga e convidou você para prepará-la em conjunto. Como deseja participar?",
+    "choices": [
+      {
+        "label": "Preparar a receita em família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Registrar a história da receita",
+        "effect": "social"
+      },
+      {
+        "label": "Ajudar apenas no que for confortável",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "familia_08",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Organizar lembranças antigas",
+    "description": "A família decidiu organizar fotografias e lembranças de diferentes épocas. Qual será sua contribuição?",
+    "choices": [
+      {
+        "label": "Separar e organizar as fotografias",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ouvir as histórias de cada lembrança",
+        "effect": "social"
+      },
+      {
+        "label": "Fazer uma pausa e continuar depois",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_07",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Clube de leitura",
+    "description": "A escola abriu um clube de leitura com encontros semanais e temas variados. O que você escolhe?",
+    "choices": [
+      {
+        "label": "Ler e preparar comentários",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar das conversas do grupo",
+        "effect": "social"
+      },
+      {
+        "label": "Começar com um livro mais curto",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_08",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Mostra de projetos",
+    "description": "Sua turma foi convidada para apresentar projetos em uma mostra escolar. Como pretende colaborar?",
+    "choices": [
+      {
+        "label": "Pesquisar e explicar o conteúdo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Apresentar o projeto ao público",
+        "effect": "social"
+      },
+      {
+        "label": "Ajudar nos preparativos nos bastidores",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_07",
+    "ageRange": [
+      5,
+      120
+    ],
+    "category": "amizade",
+    "title": "Um convite para estudar junto",
+    "description": "Uma pessoa conhecida sugeriu organizar um horário de estudos em conjunto. Como você responde?",
+    "choices": [
+      {
+        "label": "Combinar um plano de estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Aproveitar para conversar e colaborar",
+        "effect": "social"
+      },
+      {
+        "label": "Combinar um encontro mais curto",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_08",
+    "ageRange": [
+      5,
+      120
+    ],
+    "category": "amizade",
+    "title": "Retomar um contato",
+    "description": "Você recebeu uma mensagem de alguém com quem não conversa há algum tempo. O que prefere fazer?",
+    "choices": [
+      {
+        "label": "Retomar o contato aos poucos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Propor uma conversa para colocar o papo em dia",
+        "effect": "social"
+      },
+      {
+        "label": "Responder quando tiver disponibilidade",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_07",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Mentoria profissional",
+    "description": "Uma pessoa experiente ofereceu orientação sobre sua área de atuação. Qual caminho seguir?",
+    "choices": [
+      {
+        "label": "Definir metas de desenvolvimento",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar sobre experiências e contatos",
+        "effect": "social"
+      },
+      {
+        "label": "Avaliar a proposta antes de assumir compromissos",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_07",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Revisão das despesas",
+    "description": "Ao revisar suas despesas, você percebeu que alguns custos mudaram. Como pretende agir?",
+    "choices": [
+      {
+        "label": "Atualizar o planejamento mensal",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar com a família sobre prioridades",
+        "effect": "social"
+      },
+      {
+        "label": "Analisar os números antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_07",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Feira comunitária",
+    "description": "Moradores estão organizando uma feira com produtos, apresentações e atividades locais. Como deseja participar?",
+    "choices": [
+      {
+        "label": "Ajudar na organização",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conhecer os participantes e divulgar a feira",
+        "effect": "social"
+      },
+      {
+        "label": "Visitar a feira por um período breve",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_07",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Melhorias no espaço de casa",
+    "description": "Você identificou pequenas melhorias que podem deixar a casa mais funcional. Qual será o primeiro passo?",
+    "choices": [
+      {
+        "label": "Listar prioridades e planejar etapas",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar com quem divide a casa",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar opções sem pressa",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_07",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Consulta de rotina",
+    "description": "Chegou o momento de organizar um acompanhamento de rotina. Como você prefere se preparar?",
+    "choices": [
+      {
+        "label": "Anotar dúvidas e organizar os horários",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pedir apoio de alguém de confiança",
+        "effect": "social"
+      },
+      {
+        "label": "Separar um tempo tranquilo para a consulta",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_07",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Roteiro cultural",
+    "description": "Você encontrou uma programação cultural interessante em outra cidade. Como pretende organizar o passeio?",
+    "choices": [
+      {
+        "label": "Montar um roteiro com horários",
+        "effect": "balanced"
+      },
+      {
+        "label": "Combinar a visita com companhia",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher apenas uma atração para começar",
+        "effect": "wellbeing"
+      }
+    ]
   }
 ]
