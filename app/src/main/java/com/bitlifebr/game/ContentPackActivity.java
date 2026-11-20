@@ -42,7 +42,7 @@ public final class ContentPackActivity extends Activity {
     private static final int BG=Color.rgb(10,16,31), PANEL=Color.rgb(23,33,54);
     private static final int ACCENT=Color.rgb(87,224,197), TEXT=Color.rgb(244,247,252);
     private static final int MUTED=Color.rgb(163,178,200);
-    private static final long MIN_PACK_BYTES=500L*1024L*1024L;
+    private static final long MIN_PACK_BYTES=800L*1024L*1024L;
     private static final long EXTRA_SPACE=96L*1024L*1024L, MAX_UNPACKED=3L*1024L*1024L*1024L;
     private final Handler handler=new Handler(Looper.getMainLooper());
     private DownloadManager manager;
@@ -125,7 +125,7 @@ public final class ContentPackActivity extends Activity {
                         j.getLong("sizeBytes"),j.getString("sha256"),j.getString("downloadUrl"));
                 boolean safe=m.downloadUrl.startsWith("/api/content/download")||m.downloadUrl.startsWith("https://");
                 if(m.sizeBytes<MIN_PACK_BYTES||m.sizeBytes>2L*1024L*1024L*1024L||!m.sha256.matches("(?i)[0-9a-f]{64}")||!safe)
-                    throw new IllegalStateException("Manifesto inválido: o pacote precisa ter de 500 MiB a 2 GiB, SHA-256 válido e URL segura.");
+                    throw new IllegalStateException("Manifesto inválido: o pacote precisa ter de 800 MiB a 2 GiB, SHA-256 válido e URL segura.");
                 pack=m;
                 runOnUiThread(()->{size.setText("0 B / "+format(m.sizeBytes));update("Pacote "+m.version+" disponível",
                     "ETAPA 1/4 • PACOTE VALIDADO",format(m.sizeBytes)+" • tamanho real e SHA-256 recebidos do servidor.",false);
