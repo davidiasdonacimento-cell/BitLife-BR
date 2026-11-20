@@ -99,6 +99,14 @@ public final class LifeEngine {
         hash = 31 * hash + (life.city == null ? 0 : life.city.hashCode());
         hash = 31 * hash + life.siblings.size();
         hash = 31 * hash + (life.stateCode == null ? 0 : life.stateCode.hashCode());
+        // A história recente influencia o próximo acontecimento, evitando
+        // a mesma sequência previsível sempre que a idade avança.
+        int start = Math.max(0, life.history.size() - 4);
+        for (int i = start; i < life.history.size(); i++) {
+            String item = life.history.get(i);
+            hash = 31 * hash + (item == null ? 0 : item.hashCode());
+        }
+        hash = 31 * hash + (int) (life.createdAt ^ (life.createdAt >>> 32));
         return hash ^ (hash >>> 16);
     }
 
