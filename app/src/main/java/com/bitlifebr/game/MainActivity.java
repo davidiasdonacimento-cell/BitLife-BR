@@ -505,7 +505,7 @@ public final class MainActivity extends Activity {
         LinearLayout bar = new LinearLayout(this);
         bar.setOrientation(LinearLayout.HORIZONTAL);
         bar.setGravity(Gravity.CENTER);
-        bar.setPadding(dp(5), dp(6), dp(5), dp(6));
+        bar.setPadding(dp(5), dp(6), dp(5), dp(10));
         bar.setBackground(round(PANEL, 0));
 
         addNavButton(bar, "Vida", this::showLife, "life".equals(currentPage));
@@ -513,8 +513,10 @@ public final class MainActivity extends Activity {
         addNavButton(bar, "Família", this::showFamily, "family".equals(currentPage));
         addNavButton(bar, "Legado", this::showLives, "lives".equals(currentPage));
 
-        container.addView(bar, new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams navParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        navParams.bottomMargin = dp(22);
+        container.addView(bar, navParams);
     }
 
     private void addNavButton(LinearLayout row, String label, Runnable action, boolean selected) {
@@ -745,7 +747,7 @@ public final class MainActivity extends Activity {
 
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dp(16), dp(16), dp(16), dp(20));
+        root.setPadding(dp(16), dp(12), dp(16), dp(112));
 
         TextView brand = text("BITLIFE BR  /  SIMULADOR DE VIDA", 10, GREEN);
         brand.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
