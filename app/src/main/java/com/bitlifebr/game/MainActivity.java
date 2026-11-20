@@ -595,10 +595,21 @@ public final class MainActivity extends Activity {
         TextView arrow = text("›", 28, accent);
         card.addView(arrow, wrap());
 
-        card.setOnClickListener(v -> action.run());
+        card.setAlpha(0f);
+        card.setTranslationY(dp(12));
+        card.setOnClickListener(v -> {
+            v.animate().scaleX(0.975f).scaleY(0.975f).setDuration(85L)
+                    .withEndAction(() -> {
+                        v.animate().scaleX(1f).scaleY(1f).setDuration(85L).start();
+                        action.run();
+                    }).start();
+        });
         LinearLayout.LayoutParams params = match();
         params.bottomMargin = dp(8);
         root.addView(card, params);
+        long delay = Math.min(280L, root.getChildCount() * 24L);
+        card.animate().alpha(1f).translationY(0f).setStartDelay(delay)
+                .setDuration(340L).start();
     }
 
     private void addButton(LinearLayout root, String label, Runnable action, boolean primary) {
@@ -632,6 +643,9 @@ public final class MainActivity extends Activity {
         heading.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         heading.setPadding(0, dp(7), 0, 0);
         root.addView(heading, match());
+        heading.setAlpha(0f);
+        heading.setTranslationY(dp(8));
+        heading.animate().alpha(1f).translationY(0f).setDuration(420L).start();
         TextView sub = text(subtitle, 13, MUTED);
         sub.setPadding(0, dp(4), 0, dp(14));
         root.addView(sub, match());
