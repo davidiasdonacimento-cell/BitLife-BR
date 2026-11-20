@@ -295,7 +295,7 @@ public final class MainActivity extends Activity {
             return;
         }
         currentPage = "event";
-        LifeEvent event = LifeEngine.createAnnualEvent(currentLife);
+        LifeEvent event = LifeEngine.createAnnualEvent(this, currentLife);
         LinearLayout root = screen("UM NOVO ANO", "Uma situação apareceu na sua vida. O que você escolhe?");
         addHero(root, "", "ACONTECIMENTO • " + currentLife.age + " ANOS",
                 "Esta decisão avança sua idade em um ano. Leia as opções e escolha uma delas.");
