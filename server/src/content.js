@@ -6,7 +6,7 @@ import { Router } from "express";
 
 export const contentRouter = Router();
 let cachedHash = null;
-const MIN_CONTENT_PACK_BYTES = 500 * 1024 * 1024;
+const MIN_CONTENT_PACK_BYTES = 800 * 1024 * 1024;
 
 function unavailable(message = "O pacote de conteúdo ainda não foi publicado neste servidor.") {
   const error = new Error(message);
@@ -31,7 +31,7 @@ async function getPublishedPack() {
   const filePath = path.resolve(configuredPath);
   let info;
   try { info = await stat(filePath); } catch { throw unavailable(); }
-  if (!info.isFile() || info.size < MIN_CONTENT_PACK_BYTES) throw unavailable("O pacote publicado precisa ter pelo menos 500 MiB de conteúdo real. Tamanho atual: " + (info.isFile() ? info.size + " bytes" : "arquivo inválido") + ".");
+  if (!info.isFile() || info.size < MIN_CONTENT_PACK_BYTES) throw unavailable("O pacote publicado precisa ter pelo menos 800 MiB de conteúdo real. Tamanho atual: " + (info.isFile() ? info.size + " bytes" : "arquivo inválido") + ".");
   if (info.size > 2 * 1024 * 1024 * 1024) throw unavailable("O pacote excede o limite de 2 GiB suportado pelo instalador Android.");
   const configuredHash = (process.env.CONTENT_PACK_SHA256 || "").trim().toLowerCase();
   const cacheKey = [filePath, info.size, info.mtimeMs, info.ino].join("|");
