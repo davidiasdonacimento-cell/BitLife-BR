@@ -40,15 +40,15 @@ import java.util.Random;
  * atividades imediatas e acontecimentos anuais com três decisões.
  */
 public final class MainActivity extends Activity {
-    private static final int BG = Color.rgb(11, 17, 31);
-    private static final int PANEL = Color.rgb(23, 33, 53);
-    private static final int PANEL_ALT = Color.rgb(30, 43, 67);
-    private static final int TEXT = Color.rgb(245, 247, 252);
-    private static final int MUTED = Color.rgb(165, 179, 201);
-    private static final int GREEN = Color.rgb(102, 222, 181);
-    private static final int BLUE = Color.rgb(107, 177, 255);
-    private static final int PURPLE = Color.rgb(183, 145, 255);
-    private static final int ORANGE = Color.rgb(255, 185, 105);
+    private static final int BG = Color.rgb(244, 246, 244);
+    private static final int PANEL = Color.rgb(255, 255, 255);
+    private static final int PANEL_ALT = Color.rgb(231, 239, 232);
+    private static final int TEXT = Color.rgb(31, 39, 33);
+    private static final int MUTED = Color.rgb(103, 113, 106);
+    private static final int GREEN = Color.rgb(48, 139, 82);
+    private static final int BLUE = Color.rgb(65, 119, 166);
+    private static final int PURPLE = Color.rgb(117, 98, 157);
+    private static final int ORANGE = Color.rgb(176, 119, 54);
 
     private GameDatabase database;
     private LifeState currentLife;
@@ -66,22 +66,22 @@ public final class MainActivity extends Activity {
     private void showHome() {
         currentPage = "home";
         LinearLayout root = screen("VIDA BR", "Um mundo inteiro para construir a sua história.");
-        addHero(root, "🌎", "SUA VIDA COMEÇA AQUI",
+        addHero(root, "", "SUA VIDA COMEÇA AQUI",
                 "Crie uma pessoa, acompanhe cada fase e escolha o que acontece em cada ano.");
         if (currentLife != null) {
             addSection(root, "CONTINUAR DE ONDE PAROU");
-            addChoiceCard(root, "👤", currentLife.fullName() + " • " + currentLife.age + " anos",
+            addChoiceCard(root, "", currentLife.fullName() + " • " + currentLife.age + " anos",
                     currentLife.city + " - " + currentLife.stateCode + " • " + (currentLife.alive ? "Vida em andamento" : "Vida encerrada"),
                     GREEN, this::showLife);
         }
         addSection(root, "COMEÇAR");
-        addChoiceCard(root, "✨", "Criar uma nova vida",
+        addChoiceCard(root, "", "Criar uma nova vida",
                 "Escolha nome, personalidade, cidade e família.", GREEN, this::showStartOptions);
-        addChoiceCard(root, "🌳", "Legado e vidas salvas",
+        addChoiceCard(root, "", "Legado e vidas salvas",
                 "Abra outras histórias ou escolha um descendente.", BLUE, this::showLives);
-        addChoiceCard(root, "🏆", "Conquistas",
+        addChoiceCard(root, "", "Conquistas",
                 "Veja marcos realmente alcançados nas suas histórias.", PURPLE, this::showAchievements);
-        addChoiceCard(root, "📦", "Central de conteúdo",
+        addChoiceCard(root, "", "Central de conteúdo",
                 "Baixe e instale recursos publicados pelo servidor.", ORANGE,
                 () -> startActivity(new Intent(this, ContentPackActivity.class)));
         addFooter(root, "Seu progresso fica salvo neste aparelho. Cada vida possui um registro separado.");
@@ -90,12 +90,12 @@ public final class MainActivity extends Activity {
     private void showStartOptions() {
         currentPage = "start";
         LinearLayout root = screen("COMO SUA VIDA COMEÇA?", "Escolha um dos caminhos disponíveis.");
-        addChoiceCard(root, "🧑", "Criar personagem",
+        addChoiceCard(root, "", "Criar personagem",
                 "Comece uma história do seu jeito.", GREEN, () -> showCreationForm(false));
-        addChoiceCard(root, "👶", "Ser filho ou filha",
+        addChoiceCard(root, "", "Ser filho ou filha",
                 "Crie um novo personagem ligado à vida que está selecionada.", BLUE,
                 () -> showCreationForm(true));
-        addChoiceCard(root, "🌱", "Escolher descendente existente",
+        addChoiceCard(root, "", "Escolher descendente existente",
                 "Continue a história por alguém da sua família.", PURPLE, this::showDescendants);
         addButton(root, "Voltar", this::showHome, false);
     }
@@ -129,7 +129,7 @@ public final class MainActivity extends Activity {
         siblings.setWrapSelectorWheel(false);
         root.addView(siblings, match());
 
-        addChoiceCard(root, "ℹ️", "Geração automática",
+        addChoiceCard(root, "", "Geração automática",
                 childMode && currentLife != null
                         ? "O personagem será vinculado a " + currentLife.fullName() + "."
                         : "Nomes e relações familiares serão gerados quando não forem personalizados.",
@@ -181,14 +181,14 @@ public final class MainActivity extends Activity {
         LinearLayout root = screen("MINHA VIDA", "Suas decisões, seus resultados.");
         addProfileCard(root);
         addSection(root, "SEUS ATRIBUTOS");
-        addStat(root, "❤️ Saúde", currentLife.health, GREEN);
-        addStat(root, "😊 Felicidade", currentLife.happiness, ORANGE);
-        addStat(root, "🧠 Inteligência", currentLife.intelligence, BLUE);
-        addStat(root, "✨ Aparência", currentLife.appearance, PURPLE);
-        addStat(root, "🤝 Carisma", currentLife.charisma, BLUE);
-        addStat(root, "📚 Disciplina", currentLife.discipline, GREEN);
-        addStat(root, "⭐ Popularidade", currentLife.popularity, ORANGE);
-        addCardText(root, "💰 Dinheiro", formatMoney(currentLife.moneyCents),
+        addStat(root, " Saúde", currentLife.health, GREEN);
+        addStat(root, " Felicidade", currentLife.happiness, ORANGE);
+        addStat(root, " Inteligência", currentLife.intelligence, BLUE);
+        addStat(root, " Aparência", currentLife.appearance, PURPLE);
+        addStat(root, " Carisma", currentLife.charisma, BLUE);
+        addStat(root, " Disciplina", currentLife.discipline, GREEN);
+        addStat(root, " Popularidade", currentLife.popularity, ORANGE);
+        addCardText(root, " Dinheiro", formatMoney(currentLife.moneyCents),
                 currentLife.alive ? "Saldo atual da sua vida" : "A vida foi encerrada");
 
         addSection(root, "O QUE VOCÊ QUER FAZER AGORA?");
@@ -199,17 +199,17 @@ public final class MainActivity extends Activity {
         }
 
         addSection(root, "ACONTECIMENTO DO PRÓXIMO ANO");
-        addChoiceCard(root, "📅", "Um novo ano está esperando por você",
+        addChoiceCard(root, "", "Um novo ano está esperando por você",
                 "Avance para receber um acontecimento da sua fase de vida e escolher entre três caminhos.",
                 GREEN, this::showAnnualEvent);
         addSection(root, "FAMÍLIA E HISTÓRIA");
-        addChoiceCard(root, "🏡", "Minha família",
+        addChoiceCard(root, "", "Minha família",
                 "Veja responsáveis, irmãos e vínculos da sua vida.", BLUE, this::showFamily);
-        addChoiceCard(root, "📖", "Minha história",
+        addChoiceCard(root, "", "Minha história",
                 currentLife.history.size() + " acontecimentos registrados.", PURPLE, this::showHistory);
-        addChoiceCard(root, "🌳", "Vidas e legado",
+        addChoiceCard(root, "", "Vidas e legado",
                 "Troque de personagem ou crie uma nova geração.", ORANGE, this::showLives);
-        addChoiceCard(root, "📦", "Central de conteúdo",
+        addChoiceCard(root, "", "Central de conteúdo",
                 "Instalação e atualização de recursos do jogo.", BLUE,
                 () -> startActivity(new Intent(this, ContentPackActivity.class)));
         addBottomNavigation(root);
@@ -233,7 +233,7 @@ public final class MainActivity extends Activity {
         name.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         info.addView(name, match());
         info.addView(text(currentLife.age + " anos • " + ageStage(currentLife.age), 13, GREEN), match());
-        info.addView(text("📍 " + currentLife.city + " - " + currentLife.stateCode, 12, MUTED), match());
+        info.addView(text(" " + currentLife.city + " - " + currentLife.stateCode, 12, MUTED), match());
         card.addView(info, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         LinearLayout.LayoutParams params = match();
         params.bottomMargin = dp(12);
@@ -261,9 +261,9 @@ public final class MainActivity extends Activity {
         currentPage = "event";
         LifeEvent event = LifeEngine.createAnnualEvent(currentLife);
         LinearLayout root = screen("UM NOVO ANO", "Uma situação apareceu na sua vida. O que você escolhe?");
-        addHero(root, "📰", "ACONTECIMENTO • " + currentLife.age + " ANOS",
+        addHero(root, "", "ACONTECIMENTO • " + currentLife.age + " ANOS",
                 "Esta decisão avança sua idade em um ano. Leia as opções e escolha uma delas.");
-        addCardText(root, event.title, event.description, "📍 " + currentLife.city + " • " + ageStage(currentLife.age));
+        addCardText(root, event.title, event.description, " " + currentLife.city + " • " + ageStage(currentLife.age));
         addSection(root, "ESCOLHA SEU CAMINHO");
         addChoiceCard(root, "1", event.choiceALabel,
                 choiceDescription(event.choiceAId), GREEN,
@@ -294,14 +294,14 @@ public final class MainActivity extends Activity {
     private void showEventResult(String selected) {
         currentPage = "result";
         LinearLayout root = screen("DECISÃO REGISTRADA", "Seu ano avançou e o progresso foi salvo.");
-        addHero(root, "✅", "VOCÊ ESCOLHEU",
+        addHero(root, "", "VOCÊ ESCOLHEU",
                 selected + ". A sua vida agora está em uma nova fase.");
         addProfileCard(root);
         addSection(root, "ATRIBUTOS ATUALIZADOS");
-        addStat(root, "❤️ Saúde", currentLife.health, GREEN);
-        addStat(root, "😊 Felicidade", currentLife.happiness, ORANGE);
-        addStat(root, "🧠 Inteligência", currentLife.intelligence, BLUE);
-        addStat(root, "🤝 Carisma", currentLife.charisma, PURPLE);
+        addStat(root, " Saúde", currentLife.health, GREEN);
+        addStat(root, " Felicidade", currentLife.happiness, ORANGE);
+        addStat(root, " Inteligência", currentLife.intelligence, BLUE);
+        addStat(root, " Carisma", currentLife.charisma, PURPLE);
         addButton(root, "CONTINUAR MINHA VIDA", this::showLife, true);
         addButton(root, "Ver o que aconteceu", this::showHistory, false);
     }
@@ -309,47 +309,47 @@ public final class MainActivity extends Activity {
     private List<QuickAction> quickActions(LifeState life) {
         java.util.ArrayList<QuickAction> items = new java.util.ArrayList<>();
         if (life.age < 6) {
-            items.add(new QuickAction("creative_play", "🧸", "Brincar e explorar",
+            items.add(new QuickAction("creative_play", "", "Brincar e explorar",
                     "Aumenta a felicidade e desenvolve carisma.", GREEN));
-            items.add(new QuickAction("family_time", "🏡", "Ficar com a família",
+            items.add(new QuickAction("family_time", "", "Ficar com a família",
                     "Fortalece o bem-estar e a convivência.", BLUE));
-            items.add(new QuickAction("rest", "😴", "Descansar",
+            items.add(new QuickAction("rest", "", "Descansar",
                     "Recupera saúde e felicidade.", PURPLE));
         } else if (life.age < 12) {
-            items.add(new QuickAction("focus_study", "📚", "Estudar",
+            items.add(new QuickAction("focus_study", "", "Estudar",
                     "Desenvolve inteligência e disciplina.", BLUE));
-            items.add(new QuickAction("join_arts", "🎨", "Fazer uma atividade artística",
+            items.add(new QuickAction("join_arts", "", "Fazer uma atividade artística",
                     "Desenvolve carisma e felicidade.", PURPLE));
-            items.add(new QuickAction("sports_group", "⚽", "Praticar esporte",
+            items.add(new QuickAction("sports_group", "", "Praticar esporte",
                     "Melhora saúde e felicidade.", GREEN));
-            items.add(new QuickAction("rest", "😴", "Descansar",
+            items.add(new QuickAction("rest", "", "Descansar",
                     "Recupera saúde e felicidade.", ORANGE));
         } else if (life.age < 18) {
-            items.add(new QuickAction("study_group", "📚", "Participar de um grupo de estudos",
+            items.add(new QuickAction("study_group", "", "Participar de um grupo de estudos",
                     "Melhora inteligência e disciplina.", BLUE));
-            items.add(new QuickAction("sports_group", "🏃", "Praticar esporte",
+            items.add(new QuickAction("sports_group", "", "Praticar esporte",
                     "Melhora saúde e felicidade.", GREEN));
-            items.add(new QuickAction("social_network", "🧑‍🤝‍🧑", "Socializar",
+            items.add(new QuickAction("social_network", "", "Socializar",
                     "Desenvolve carisma e popularidade.", PURPLE));
-            items.add(new QuickAction("rest", "😴", "Descansar",
+            items.add(new QuickAction("rest", "", "Descansar",
                     "Recupera saúde e felicidade.", ORANGE));
         } else if (life.age < 60) {
-            items.add(new QuickAction("work_shift", "💼", "Fazer trabalho extra",
+            items.add(new QuickAction("work_shift", "", "Fazer trabalho extra",
                     "Receba R$ 75,00 e desenvolva disciplina.", GREEN));
-            items.add(new QuickAction("professional_course", "🎓", "Fazer um curso",
+            items.add(new QuickAction("professional_course", "", "Fazer um curso",
                     "Aumenta inteligência e disciplina.", BLUE));
-            items.add(new QuickAction("social_network", "🤝", "Conhecer pessoas",
+            items.add(new QuickAction("social_network", "", "Conhecer pessoas",
                     "Desenvolve carisma e popularidade.", PURPLE));
-            items.add(new QuickAction("rest", "😴", "Descansar",
+            items.add(new QuickAction("rest", "", "Descansar",
                     "Recupera saúde e felicidade.", ORANGE));
         } else {
-            items.add(new QuickAction("community", "🌻", "Participar da comunidade",
+            items.add(new QuickAction("community", "", "Participar da comunidade",
                     "Aumenta felicidade e popularidade.", GREEN));
-            items.add(new QuickAction("personal_hobby", "🎻", "Dedicar tempo a um hobby",
+            items.add(new QuickAction("personal_hobby", "", "Dedicar tempo a um hobby",
                     "Estimula felicidade e interesses pessoais.", PURPLE));
-            items.add(new QuickAction("family_time", "🏡", "Ficar com a família",
+            items.add(new QuickAction("family_time", "", "Ficar com a família",
                     "Fortalece os vínculos e a felicidade.", BLUE));
-            items.add(new QuickAction("rest", "😴", "Descansar",
+            items.add(new QuickAction("rest", "", "Descansar",
                     "Recupera saúde e felicidade.", ORANGE));
         }
         return items;
@@ -358,9 +358,9 @@ public final class MainActivity extends Activity {
     private void showFamily() {
         currentPage = "family";
         LinearLayout root = screen("MINHA FAMÍLIA", "Pessoas ligadas à história de " + currentLife.fullName() + ".");
-        addChoiceCard(root, "👨", "Responsável 1", currentLife.fatherName,
+        addChoiceCard(root, "", "Responsável 1", currentLife.fatherName,
                 BLUE, () -> message("Responsável 1", currentLife.fatherName));
-        addChoiceCard(root, "👩", "Responsável 2", currentLife.motherName,
+        addChoiceCard(root, "", "Responsável 2", currentLife.motherName,
                 PURPLE, () -> message("Responsável 2", currentLife.motherName));
         addSection(root, "IRMÃOS • " + currentLife.siblings.size());
         if (currentLife.siblings.isEmpty()) {
@@ -368,11 +368,11 @@ public final class MainActivity extends Activity {
         } else {
             for (int i = 0; i < currentLife.siblings.size(); i++) {
                 final String sibling = currentLife.siblings.get(i);
-                addChoiceCard(root, "🧒", sibling, "Irmão ou irmã • membro da família",
+                addChoiceCard(root, "", sibling, "Irmão ou irmã • membro da família",
                         BLUE, () -> message("Membro da família", sibling));
             }
         }
-        addChoiceCard(root, "💚", "Passar tempo com a família",
+        addChoiceCard(root, "", "Passar tempo com a família",
                 "Aumenta felicidade e carisma sem avançar a idade.", GREEN,
                 () -> performActivity("family_time"));
         addButton(root, "Voltar à minha vida", this::showLife, false);
@@ -407,7 +407,7 @@ public final class MainActivity extends Activity {
         }
         LinearLayout root = screen("ESCOLHER DESCENDENTE", "Selecione qualquer personagem da lista.");
         for (LifeState descendant : descendants) {
-            addChoiceCard(root, "🌱", descendant.fullName() + " • " + descendant.age + " anos",
+            addChoiceCard(root, "", descendant.fullName() + " • " + descendant.age + " anos",
                     descendant.city + " - " + descendant.stateCode + " • " + ageStage(descendant.age),
                     GREEN, () -> {
                         currentLife = descendant;
@@ -427,7 +427,7 @@ public final class MainActivity extends Activity {
         } else {
             for (LifeState life : lives) {
                 boolean active = currentLife != null && currentLife.id.equals(life.id);
-                addChoiceCard(root, active ? "🟢" : "👤",
+                addChoiceCard(root, active ? "" : "",
                         life.fullName() + " • " + life.age + " anos",
                         life.city + " - " + life.stateCode + (active ? " • Vida selecionada" : " • " + (life.isDescendant() ? "Descendente" : "Vida independente")),
                         active ? GREEN : BLUE, () -> {
@@ -437,7 +437,7 @@ public final class MainActivity extends Activity {
                         });
             }
         }
-        addChoiceCard(root, "🌱", "Escolher um descendente",
+        addChoiceCard(root, "", "Escolher um descendente",
                 "Continue pela geração seguinte.", PURPLE, this::showDescendants);
         addButton(root, "Nova vida independente", () -> showCreationForm(false), true);
         addButton(root, "Voltar", this::showLife, false);
@@ -459,7 +459,7 @@ public final class MainActivity extends Activity {
             addCardText(root, "Sua primeira conquista está esperando",
                     "Avance na sua história e faça escolhas para desbloquear marcos.");
         } else {
-            for (String item : earned) addChoiceCard(root, "🏅", item,
+            for (String item : earned) addChoiceCard(root, "", item,
                     "Conquista desbloqueada nesta vida.", GREEN, () -> { });
         }
         addButton(root, "Voltar à minha vida", this::showLife, true);
@@ -470,10 +470,10 @@ public final class MainActivity extends Activity {
         LinearLayout row = new LinearLayout(this);
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER);
-        addNavButton(row, "👤\nVida", this::showLife);
-        addNavButton(row, "👨‍👩‍👧\nFamília", this::showFamily);
-        addNavButton(row, "📖\nHistória", this::showHistory);
-        addNavButton(row, "🌳\nLegado", this::showLives);
+        addNavButton(row, "\nVida", this::showLife);
+        addNavButton(row, "\nFamília", this::showFamily);
+        addNavButton(row, "\nHistória", this::showHistory);
+        addNavButton(row, "\nLegado", this::showLives);
         root.addView(row, match());
     }
 
@@ -497,9 +497,11 @@ public final class MainActivity extends Activity {
         card.setGravity(Gravity.CENTER);
         card.setPadding(dp(18), dp(23), dp(18), dp(23));
         card.setBackground(round(PANEL_ALT, 20));
-        TextView image = text(icon, 43, TEXT);
-        image.setGravity(Gravity.CENTER);
-        card.addView(image, match());
+        if (icon != null && !icon.trim().isEmpty()) {
+            TextView image = text(icon, 43, TEXT);
+            image.setGravity(Gravity.CENTER);
+            card.addView(image, match());
+        }
         TextView heading = text(title, 16, GREEN);
         heading.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         heading.setGravity(Gravity.CENTER);
@@ -537,7 +539,7 @@ public final class MainActivity extends Activity {
         progress.setMax(100);
         progress.setProgress(Math.max(0, Math.min(100, value)));
         progress.setProgressTintList(android.content.res.ColorStateList.valueOf(color));
-        progress.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.rgb(44, 57, 78)));
+        progress.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.rgb(218, 225, 219)));
         LinearLayout.LayoutParams barParams = match();
         barParams.topMargin = dp(5);
         card.addView(progress, barParams);
@@ -577,10 +579,12 @@ public final class MainActivity extends Activity {
         card.setClickable(true);
         card.setFocusable(true);
 
-        TextView symbol = text(icon, 23, accent);
-        symbol.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams symbolParams = new LinearLayout.LayoutParams(dp(42), dp(42));
-        card.addView(symbol, symbolParams);
+        if (icon != null && !icon.trim().isEmpty()) {
+            TextView symbol = text(icon, 23, accent);
+            symbol.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams symbolParams = new LinearLayout.LayoutParams(dp(42), dp(42));
+            card.addView(symbol, symbolParams);
+        }
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
@@ -618,7 +622,7 @@ public final class MainActivity extends Activity {
         button.setAllCaps(false);
         button.setTextSize(14);
         button.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        button.setTextColor(primary ? Color.rgb(10, 33, 31) : TEXT);
+        button.setTextColor(primary ? Color.rgb(255, 255, 255) : TEXT);
         button.setBackground(round(primary ? GREEN : PANEL_ALT, 14));
         button.setPadding(dp(12), dp(8), dp(12), dp(8));
         button.setOnClickListener(v -> action.run());
@@ -758,9 +762,9 @@ public final class MainActivity extends Activity {
     }
 
     private String avatarFor(LifeState life) {
-        if ("Feminino".equalsIgnoreCase(life.gender)) return "👩";
-        if ("Masculino".equalsIgnoreCase(life.gender)) return "👨";
-        return "🧑";
+        if ("Feminino".equalsIgnoreCase(life.gender)) return "F";
+        if ("Masculino".equalsIgnoreCase(life.gender)) return "M";
+        return "P";
     }
 
     private String choiceDescription(String id) {
