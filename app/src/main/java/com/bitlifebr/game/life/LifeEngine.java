@@ -192,12 +192,33 @@ public final class LifeEngine {
         LifeState next = current.copy();
         next.age = current.age + 1;
         next.birthDate = advanceBirthDate(current.birthDate);
-        next = applyChoiceEffects(next, choiceId);
+        org.json.JSONObject packEffects = event.choiceAId.equals(choiceId) ? event.choiceAEffects
+                : event.choiceBId.equals(choiceId) ? event.choiceBEffects : event.choiceCEffects;
+        if (packEffects != null) applyPackChoiceEffects(next, packEffects);
+        else next = applyChoiceEffects(next, choiceId);
         String label = event.choiceAId.equals(choiceId) ? event.choiceALabel
                 : event.choiceBId.equals(choiceId) ? event.choiceBLabel : event.choiceCLabel;
         next.history.add("Aos " + next.age + " anos: " + event.title + " — " + label + ".");
         trimHistory(next);
         return next;
+    }
+
+    /** Aplica os efeitos reais definidos em cada escolha do pacote adicional. */
+    private static void applyPackChoiceEffects(LifeState next, org.json.JSONObject effects) {
+        next.happiness += effects.optInt("happiness", 0);
+        next.health += effects.optInt("health", 0);
+        next.intelligence += effects.optInt("intelligence", 0);
+        next.appearance += effects.optInt("appearance", 0);
+        next.charisma += effects.optInt("charisma", 0);
+        next.discipline += effects.optInt("discipline", 0);
+        next.popularity += effects.optInt("popularity", 0);
+        int social = effects.optInt("social", 0);
+        next.charisma += social;
+        next.popularity += social;
+        int family = effects.optInt("family", 0);
+        next.happiness += family;
+        next.charisma += family;
+        clampStats(next);
     }
 
     private static LifeState applyChoiceEffects(LifeState next, String id) {
