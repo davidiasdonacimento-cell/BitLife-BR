@@ -19,7 +19,7 @@ Na branch `feature/android-foundation-v1`, a primeira etapa inclui:
 - Formulário com identidade, nascimento, gênero, personalidade e localização.
 - Geração ou personalização dos responsáveis e escolha da quantidade de irmãos.
 - Múltiplas vidas salvas localmente, com migração aditiva do save antigo.
-- Eventos anuais com duas escolhas, acontecimentos distintos por idade, efeitos nos atributos e bloqueio de avanço duplicado.
+- Eventos anuais com três escolhas, acontecimentos distintos por idade, efeitos nos atributos e bloqueio de avanço duplicado.
 - Central de Conteúdo Android com consulta ao manifesto, download real, barra baseada em bytes recebidos, verificação SHA-256 e extração segura do ZIP. O instalador exige pacote publicado de pelo menos 800 MiB e no máximo 2 GiB.
 
 ## Planejamento completo
@@ -30,7 +30,7 @@ Consulte [docs/PLANEJAMENTO_COMPLETO.md](docs/PLANEJAMENTO_COMPLETO.md) para tod
 
 Consulte [server/README.md](server/README.md). Configure `DATABASE_URL` e `JWT_SECRET` no provedor de hospedagem. Nunca coloque segredos no Git.
 
-A API já possui uma base de autenticação, sessões isoladas, save com revisão, validação inicial de escolhas e rotas de manifesto/download do pacote Android. O manifesto só fica disponível quando um ZIP real de pelo menos 500 MiB está publicado no servidor. No estado atual do repositório, ainda não há esse ZIP publicado; portanto, a central deve informar indisponibilidade até que os recursos reais sejam produzidos e hospedados. O instalador não cria nem simula um pacote de 1 GB. O cliente Android ainda precisa de URL de produção, tela de conta e fluxo de sincronização antes que o jogo possa ser considerado online em produção.
+A API já possui uma base de autenticação, sessões isoladas, save com revisão, validação inicial de escolhas e rotas de manifesto/download do pacote Android. O manifesto só fica disponível quando um ZIP real de pelo menos 800 MiB está publicado no servidor. No estado atual do repositório, ainda não há esse ZIP publicado; portanto, a central deve informar indisponibilidade até que os recursos reais sejam produzidos e hospedados. O instalador não cria nem simula um pacote de 1 GB. O cliente Android ainda precisa de URL de produção, tela de conta e fluxo de sincronização antes que o jogo possa ser considerado online em produção.
 
 ## Compilar e testar
 
