@@ -7,7 +7,7 @@ test("cada sessão recebe 12 personagens fictícios com IDs próprios", () => {
   assert.equal(a.length,12);
   assert.equal(b.length,12);
   assert.equal(new Set(a.map(x=>x.id)).size,12);
-  assert.deepEqual(a.map(x=>x.id),b.map(x=>x.id));
+  assert.equal(a.some(x=>b.some(y=>y.id===x.id)),false,"sessões isoladas não podem compartilhar IDs de NPCs");
   for(const npc of a) {
     assert.match(npc.id,/^npc_\d+$/);
     assert.ok(npc.name.length>2);
