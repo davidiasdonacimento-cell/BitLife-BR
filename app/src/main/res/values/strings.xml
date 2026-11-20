@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BitLife BR</string>
+    <string name="title">BITLIFE BR</string>
+    <string name="subtitle">Sua vida. Suas escolhas.</string>
+    <string name="new_life">Começar uma nova vida</string>
+    <string name="advance_year">Avançar um ano</string>
+    <string name="no_character">Nenhum personagem criado ainda.</string>
+    <string name="age">Idade: %1$d anos</string>
+    <string name="status_created">Nova vida criada! Seu progresso foi salvo.</string>
+    <string name="status_advanced">Mais um ano passou. Sua vida foi salva.</string>
+    <string name="stats">Felicidade %1$d  •  Saúde %2$d  •  Inteligência %3$d</string>
+    <string name="offline">Jogo offline • Progresso salvo neste aparelho</string>
+    <string name="history">História da sua vida</string>
+</resources>
