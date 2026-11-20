@@ -20,7 +20,8 @@ public class LifeEngineTest {
         assertEquals(72, next.happiness);
         assertEquals(52, next.charisma);
         assertEquals(0, life.age);
-        assertEquals(1, next.history.size());
+        assertEquals(2, next.history.size());
+        assertEquals("19/11/2027", next.birthDate);
     }
 
     @Test
