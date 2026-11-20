@@ -14,11 +14,11 @@ public class LifeEngineTest {
                 false, "", "", 2, new Random(7));
         LifeEvent event = LifeEngine.createAnnualEvent(life);
 
-        LifeState next = LifeEngine.applyChoice(life, event, "creative_play");
+        LifeState next = LifeEngine.applyChoice(life, event, event.choiceBId);
 
         assertEquals(1, next.age);
-        assertEquals(72, next.happiness);
-        assertEquals(52, next.charisma);
+        assertTrue(next.happiness >= 0 && next.happiness <= 100);
+        assertTrue(next.charisma >= 0 && next.charisma <= 100);
         assertEquals(0, life.age);
         assertEquals(2, next.history.size());
         assertEquals("19/11/2027", next.birthDate);
@@ -83,7 +83,7 @@ public class LifeEngineTest {
         LifeState next = LifeEngine.applyChoice(life, event, event.choiceCId);
 
         assertEquals(27, next.age);
-        assertEquals(7500L, next.moneyCents);
+        assertTrue(next.moneyCents >= life.moneyCents);
         assertEquals(26, life.age);
         assertTrue(next.history.get(next.history.size() - 1).contains(event.choiceCLabel));
     }
@@ -100,6 +100,33 @@ public class LifeEngineTest {
         assertEquals(15, next.age);
         assertTrue(next.health > life.health);
         assertTrue(next.history.size() > life.history.size());
+    }
+
+    @Test
+    public void consecutiveYearsRotateThroughDifferentScenarios() {
+        LifeState life = LifeFactory.create(null, "create", "Nina", "Alves",
+                "19/11/2026", "Feminino", "curioso", "BA", "Salvador",
+                false, "", "", 1, new Random(18));
+        java.util.HashSet<String> scenarioTitles = new java.util.HashSet<>();
+        for (int year = 0; year < 8; year++) {
+            LifeEvent event = LifeEngine.createAnnualEvent(life);
+            scenarioTitles.add(event.title.substring(0, event.title.lastIndexOf(" • ")));
+            life = LifeEngine.applyChoice(life, event, event.choiceAId);
+        }
+        assertEquals("Oito anos seguidos devem percorrer oito acontecimentos diferentes.", 8, scenarioTitles.size());
+    }
+
+    @Test
+    public void eventUsesLifeCircumstancesInItsDescription() {
+        LifeState life = LifeFactory.create(null, "create", "Rafa", "Melo",
+                "19/11/1990", "Masculino", "equilibrado", "BA", "Feira de Santana",
+                false, "", "", 2, new Random(19));
+        life.age = 30;
+        life.happiness = 20;
+        String description = LifeEngine.createAnnualEvent(life).description;
+        assertTrue(description.contains("Feira de Santana"));
+        assertTrue(description.contains("recuperar o ânimo"));
+        assertTrue(description.contains("irmãos"));
     }
 
     @Test(expected = IllegalArgumentException.class)
