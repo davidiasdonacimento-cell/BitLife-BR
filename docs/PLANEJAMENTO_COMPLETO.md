@@ -129,10 +129,17 @@ A população do universo deve refletir nascimentos, mortes e migrações. Estat
 - Modelo de vida com atributos, dados familiares, vínculo de descendência e histórico.
 - Eventos anuais por faixa etária, com duas opções e efeitos diferentes nos atributos.
 - Histórico local das escolhas.
+- Eventos anuais com textos e identificadores específicos por idade; evento antigo não pode ser aplicado de novo.
+- Avanço anual salvo em transação SQLite e validado contra a vida/idade ativa.
+- Central de Conteúdo nativa: download por bytes reais, retomada pelo DownloadManager, verificação SHA-256 e extração ZIP com validação de caminho.
+- API de conteúdo com manifesto e download a partir de um arquivo publicado no armazenamento persistente do servidor.
 - Banco preparado para múltiplas vidas e migração aditiva do save antigo.
 
 ### Ainda não entregue
-- Autenticação online integrada à interface Android e URL de produção configurada.
+- Arquivo ZIP real de recursos publicado no servidor; por isso o endpoint de manifesto responde indisponível até CONTENT_PACK_PATH estar configurado.
+- Pacote de 1 GiB composto por artes, sons, textos, catálogos e outros recursos reais; não criar arquivos vazios/repetidos para inflar tamanho.
+- URL de produção da API configurada no APK.
+- Autenticação online integrada à interface Android.
 - Sincronização online automática e resolução de conflitos na interface.
 - Motor avançado de NPCs e simulação offline do universo.
 - Nascimento de filhos dentro da simulação, morte, sucessão e herança completa.
