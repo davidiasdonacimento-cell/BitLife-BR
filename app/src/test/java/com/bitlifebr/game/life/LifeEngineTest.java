@@ -1,6 +1,7 @@
 package com.bitlifebr.game.life;
 
 import org.junit.Test;
+import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -136,4 +137,27 @@ public class LifeEngineTest {
                 false, "", "", 0, new Random(3));
         LifeEngine.applyChoice(life, LifeEngine.createAnnualEvent(life), "invalid_choice");
     }
+    @Test
+    public void expansionPackChoiceAppliesItsActualEffectValues() throws Exception {
+        LifeState life = LifeFactory.create(null, "create", "Davi", "Silva",
+                "19/11/2000", "Masculino", "equilibrado", "BA", "Salvador",
+                false, "", "", 0, new Random(22));
+        life.age = 26;
+        JSONObject effects = new JSONObject();
+        effects.put("happiness", 4);
+        effects.put("intelligence", 3);
+        effects.put("social", 2);
+        LifeEvent event = new LifeEvent(life.id, life.age, "pack_test", "Evento do pacote",
+                "Teste de efeitos reais", "family_time", "Escolha A",
+                "rest", "Escolha B", "social_network", "Escolha C",
+                effects, new JSONObject(), new JSONObject());
+
+        LifeState next = LifeEngine.applyChoice(life, event, event.choiceAId);
+
+        assertEquals(life.happiness + 4, next.happiness);
+        assertEquals(life.intelligence + 3, next.intelligence);
+        assertEquals(life.charisma + 2, next.charisma);
+        assertEquals(life.popularity + 2, next.popularity);
+    }
+
 }
