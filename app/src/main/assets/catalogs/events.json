@@ -1,0 +1,1442 @@
+[
+  {
+    "id": "familia_01",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Um almoço em família",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Passar mais tempo com a família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar e ouvir todos",
+        "effect": "social"
+      },
+      {
+        "label": "Reservar um momento tranquilo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "familia_02",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Uma visita inesperada",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Passar mais tempo com a família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar e ouvir todos",
+        "effect": "social"
+      },
+      {
+        "label": "Reservar um momento tranquilo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "familia_03",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Uma tradição especial",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Passar mais tempo com a família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar e ouvir todos",
+        "effect": "social"
+      },
+      {
+        "label": "Reservar um momento tranquilo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "familia_04",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Um passeio no fim de semana",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Passar mais tempo com a família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar e ouvir todos",
+        "effect": "social"
+      },
+      {
+        "label": "Reservar um momento tranquilo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "familia_05",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Uma conversa importante",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Passar mais tempo com a família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar e ouvir todos",
+        "effect": "social"
+      },
+      {
+        "label": "Reservar um momento tranquilo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "familia_06",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "familia",
+    "title": "Uma comemoração em casa",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Passar mais tempo com a família",
+        "effect": "balanced"
+      },
+      {
+        "label": "Conversar e ouvir todos",
+        "effect": "social"
+      },
+      {
+        "label": "Reservar um momento tranquilo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_01",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Projeto da feira escolar",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Dedicar tempo aos estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar de uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Pedir orientação a alguém",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_02",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Uma matéria nova",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Dedicar tempo aos estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar de uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Pedir orientação a alguém",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_03",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Convite para clube escolar",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Dedicar tempo aos estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar de uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Pedir orientação a alguém",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_04",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Trabalho em equipe",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Dedicar tempo aos estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar de uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Pedir orientação a alguém",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_05",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Uma apresentação",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Dedicar tempo aos estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar de uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Pedir orientação a alguém",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "escola_06",
+    "ageRange": [
+      5,
+      18
+    ],
+    "category": "escola",
+    "title": "Desafio de leitura",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Dedicar tempo aos estudos",
+        "effect": "balanced"
+      },
+      {
+        "label": "Participar de uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Pedir orientação a alguém",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_01",
+    "ageRange": [
+      5,
+      30
+    ],
+    "category": "amizade",
+    "title": "Um novo colega",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Se aproximar e conversar",
+        "effect": "balanced"
+      },
+      {
+        "label": "Convidar para uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Respeitar seu próprio tempo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_02",
+    "ageRange": [
+      5,
+      30
+    ],
+    "category": "amizade",
+    "title": "Convite para sair em grupo",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Se aproximar e conversar",
+        "effect": "balanced"
+      },
+      {
+        "label": "Convidar para uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Respeitar seu próprio tempo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_03",
+    "ageRange": [
+      5,
+      30
+    ],
+    "category": "amizade",
+    "title": "Um amigo precisa conversar",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Se aproximar e conversar",
+        "effect": "balanced"
+      },
+      {
+        "label": "Convidar para uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Respeitar seu próprio tempo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_04",
+    "ageRange": [
+      5,
+      30
+    ],
+    "category": "amizade",
+    "title": "Organizar uma atividade",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Se aproximar e conversar",
+        "effect": "balanced"
+      },
+      {
+        "label": "Convidar para uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Respeitar seu próprio tempo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_05",
+    "ageRange": [
+      5,
+      30
+    ],
+    "category": "amizade",
+    "title": "Reencontro com colega",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Se aproximar e conversar",
+        "effect": "balanced"
+      },
+      {
+        "label": "Convidar para uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Respeitar seu próprio tempo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "amizade_06",
+    "ageRange": [
+      5,
+      30
+    ],
+    "category": "amizade",
+    "title": "Conhecer pessoas novas",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Se aproximar e conversar",
+        "effect": "balanced"
+      },
+      {
+        "label": "Convidar para uma atividade",
+        "effect": "social"
+      },
+      {
+        "label": "Respeitar seu próprio tempo",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_01",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Uma oportunidade profissional",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Buscar uma nova oportunidade",
+        "effect": "balanced"
+      },
+      {
+        "label": "Investir em qualificação",
+        "effect": "social"
+      },
+      {
+        "label": "Planejar antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_02",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Um curso de especialização",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Buscar uma nova oportunidade",
+        "effect": "balanced"
+      },
+      {
+        "label": "Investir em qualificação",
+        "effect": "social"
+      },
+      {
+        "label": "Planejar antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_03",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Um projeto no trabalho",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Buscar uma nova oportunidade",
+        "effect": "balanced"
+      },
+      {
+        "label": "Investir em qualificação",
+        "effect": "social"
+      },
+      {
+        "label": "Planejar antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_04",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Uma entrevista",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Buscar uma nova oportunidade",
+        "effect": "balanced"
+      },
+      {
+        "label": "Investir em qualificação",
+        "effect": "social"
+      },
+      {
+        "label": "Planejar antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_05",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Uma mudança de área",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Buscar uma nova oportunidade",
+        "effect": "balanced"
+      },
+      {
+        "label": "Investir em qualificação",
+        "effect": "social"
+      },
+      {
+        "label": "Planejar antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "carreira_06",
+    "ageRange": [
+      16,
+      80
+    ],
+    "category": "carreira",
+    "title": "Uma meta profissional",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Buscar uma nova oportunidade",
+        "effect": "balanced"
+      },
+      {
+        "label": "Investir em qualificação",
+        "effect": "social"
+      },
+      {
+        "label": "Planejar antes de decidir",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_01",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Planejamento do orçamento",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Guardar uma parte do dinheiro",
+        "effect": "balanced"
+      },
+      {
+        "label": "Rever o orçamento",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar alternativas",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_02",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Uma despesa inesperada",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Guardar uma parte do dinheiro",
+        "effect": "balanced"
+      },
+      {
+        "label": "Rever o orçamento",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar alternativas",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_03",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Uma meta de economia",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Guardar uma parte do dinheiro",
+        "effect": "balanced"
+      },
+      {
+        "label": "Rever o orçamento",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar alternativas",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_04",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Comparar opções de compra",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Guardar uma parte do dinheiro",
+        "effect": "balanced"
+      },
+      {
+        "label": "Rever o orçamento",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar alternativas",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_05",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Organizar as contas",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Guardar uma parte do dinheiro",
+        "effect": "balanced"
+      },
+      {
+        "label": "Rever o orçamento",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar alternativas",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "finanças_06",
+    "ageRange": [
+      16,
+      120
+    ],
+    "category": "finanças",
+    "title": "Uma oportunidade de renda",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Guardar uma parte do dinheiro",
+        "effect": "balanced"
+      },
+      {
+        "label": "Rever o orçamento",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar alternativas",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_01",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Ação no bairro",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Participar da iniciativa",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ajudar na organização",
+        "effect": "social"
+      },
+      {
+        "label": "Contribuir de outra maneira",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_02",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Evento comunitário",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Participar da iniciativa",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ajudar na organização",
+        "effect": "social"
+      },
+      {
+        "label": "Contribuir de outra maneira",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_03",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Projeto voluntário",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Participar da iniciativa",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ajudar na organização",
+        "effect": "social"
+      },
+      {
+        "label": "Contribuir de outra maneira",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_04",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Uma campanha local",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Participar da iniciativa",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ajudar na organização",
+        "effect": "social"
+      },
+      {
+        "label": "Contribuir de outra maneira",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_05",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Atividade cultural",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Participar da iniciativa",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ajudar na organização",
+        "effect": "social"
+      },
+      {
+        "label": "Contribuir de outra maneira",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "comunidade_06",
+    "ageRange": [
+      8,
+      120
+    ],
+    "category": "comunidade",
+    "title": "Mutirão de melhorias",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Participar da iniciativa",
+        "effect": "balanced"
+      },
+      {
+        "label": "Ajudar na organização",
+        "effect": "social"
+      },
+      {
+        "label": "Contribuir de outra maneira",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "hobby_01",
+    "ageRange": [
+      3,
+      120
+    ],
+    "category": "hobby",
+    "title": "Descobrir um hobby",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Experimentar algo novo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Praticar com regularidade",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar outras opções",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "hobby_02",
+    "ageRange": [
+      3,
+      120
+    ],
+    "category": "hobby",
+    "title": "Retomar uma atividade",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Experimentar algo novo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Praticar com regularidade",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar outras opções",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "hobby_03",
+    "ageRange": [
+      3,
+      120
+    ],
+    "category": "hobby",
+    "title": "Oficina criativa",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Experimentar algo novo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Praticar com regularidade",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar outras opções",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "hobby_04",
+    "ageRange": [
+      3,
+      120
+    ],
+    "category": "hobby",
+    "title": "Um desafio pessoal",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Experimentar algo novo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Praticar com regularidade",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar outras opções",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "hobby_05",
+    "ageRange": [
+      3,
+      120
+    ],
+    "category": "hobby",
+    "title": "Aprender uma habilidade",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Experimentar algo novo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Praticar com regularidade",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar outras opções",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "hobby_06",
+    "ageRange": [
+      3,
+      120
+    ],
+    "category": "hobby",
+    "title": "Compartilhar uma criação",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Experimentar algo novo",
+        "effect": "balanced"
+      },
+      {
+        "label": "Praticar com regularidade",
+        "effect": "social"
+      },
+      {
+        "label": "Pesquisar outras opções",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_01",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Reorganizar a casa",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Planejar as mudanças",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar custos e opções",
+        "effect": "social"
+      },
+      {
+        "label": "Conversar com a família",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_02",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Pesquisar um novo lar",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Planejar as mudanças",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar custos e opções",
+        "effect": "social"
+      },
+      {
+        "label": "Conversar com a família",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_03",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Pequena reforma",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Planejar as mudanças",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar custos e opções",
+        "effect": "social"
+      },
+      {
+        "label": "Conversar com a família",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_04",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Conversa sobre moradia",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Planejar as mudanças",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar custos e opções",
+        "effect": "social"
+      },
+      {
+        "label": "Conversar com a família",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_05",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Planejar uma mudança",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Planejar as mudanças",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar custos e opções",
+        "effect": "social"
+      },
+      {
+        "label": "Conversar com a família",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "moradia_06",
+    "ageRange": [
+      18,
+      120
+    ],
+    "category": "moradia",
+    "title": "Melhorar um cômodo",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Planejar as mudanças",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar custos e opções",
+        "effect": "social"
+      },
+      {
+        "label": "Conversar com a família",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_01",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Organizar uma rotina saudável",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Organizar uma rotina equilibrada",
+        "effect": "balanced"
+      },
+      {
+        "label": "Buscar orientação adequada",
+        "effect": "social"
+      },
+      {
+        "label": "Priorizar descanso e bem-estar",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_02",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Marcar um acompanhamento",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Organizar uma rotina equilibrada",
+        "effect": "balanced"
+      },
+      {
+        "label": "Buscar orientação adequada",
+        "effect": "social"
+      },
+      {
+        "label": "Priorizar descanso e bem-estar",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_03",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Ajustar o horário de descanso",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Organizar uma rotina equilibrada",
+        "effect": "balanced"
+      },
+      {
+        "label": "Buscar orientação adequada",
+        "effect": "social"
+      },
+      {
+        "label": "Priorizar descanso e bem-estar",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_04",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Experimentar uma atividade leve",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Organizar uma rotina equilibrada",
+        "effect": "balanced"
+      },
+      {
+        "label": "Buscar orientação adequada",
+        "effect": "social"
+      },
+      {
+        "label": "Priorizar descanso e bem-estar",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_05",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Preparar refeições em casa",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Organizar uma rotina equilibrada",
+        "effect": "balanced"
+      },
+      {
+        "label": "Buscar orientação adequada",
+        "effect": "social"
+      },
+      {
+        "label": "Priorizar descanso e bem-estar",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "saúde_06",
+    "ageRange": [
+      0,
+      120
+    ],
+    "category": "saúde",
+    "title": "Reservar tempo para relaxar",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Organizar uma rotina equilibrada",
+        "effect": "balanced"
+      },
+      {
+        "label": "Buscar orientação adequada",
+        "effect": "social"
+      },
+      {
+        "label": "Priorizar descanso e bem-estar",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_01",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Planejar uma viagem",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Planejar os detalhes",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar opções econômicas",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher um passeio mais simples",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_02",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Conhecer um lugar próximo",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Planejar os detalhes",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar opções econômicas",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher um passeio mais simples",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_03",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Visitar parentes em outra cidade",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Planejar os detalhes",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar opções econômicas",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher um passeio mais simples",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_04",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Organizar um passeio cultural",
+    "description": "Uma nova situação surgiu em sua vida. Como você gostaria de lidar com isso?",
+    "choices": [
+      {
+        "label": "Planejar os detalhes",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar opções econômicas",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher um passeio mais simples",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_05",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Pesquisar destinos",
+    "description": "Você recebeu uma oportunidade e precisa decidir qual caminho seguir.",
+    "choices": [
+      {
+        "label": "Planejar os detalhes",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar opções econômicas",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher um passeio mais simples",
+        "effect": "wellbeing"
+      }
+    ]
+  },
+  {
+    "id": "viagem_06",
+    "ageRange": [
+      10,
+      120
+    ],
+    "category": "viagem",
+    "title": "Fazer um roteiro econômico",
+    "description": "Esse acontecimento pode trazer mudanças para sua rotina. O que fará?",
+    "choices": [
+      {
+        "label": "Planejar os detalhes",
+        "effect": "balanced"
+      },
+      {
+        "label": "Pesquisar opções econômicas",
+        "effect": "social"
+      },
+      {
+        "label": "Escolher um passeio mais simples",
+        "effect": "wellbeing"
+      }
+    ]
+  }
+]
