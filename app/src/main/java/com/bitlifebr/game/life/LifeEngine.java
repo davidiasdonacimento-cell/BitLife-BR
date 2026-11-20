@@ -6,82 +6,106 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-/** Motor de decisões do BitLife BR. Toda escolha altera e retorna um save novo. */
+/**
+ * Motor de eventos do BitLife BR.
+ * Os acontecimentos são escolhidos por vida/idade/estado, não por uma sequência fixa
+ * de quatro textos. O mesmo save sempre recebe o mesmo evento até tomar uma decisão.
+ */
 public final class LifeEngine {
     private LifeEngine() { }
 
-    private static final String[][] TITLES = {
-        {"Uma surpresa em família", "Uma descoberta inesperada", "Um dia cheio de brincadeiras", "Um momento especial em casa"},
-        {"Uma novidade na escola", "Uma amizade está começando", "Um projeto chamou atenção", "Um convite para uma atividade"},
-        {"Uma escolha na adolescência", "Uma oportunidade com amigos", "Um desafio pessoal", "Uma novidade nos estudos"},
-        {"Uma oportunidade para o futuro", "Uma decisão importante", "Uma proposta inesperada", "Um novo capítulo profissional"},
-        {"Uma nova fase da vida", "Um convite da comunidade", "Uma ideia para realizar", "Um reencontro especial"}
+    private static final Scenario[][] SCENARIOS = {
+        {
+            s("Um passeio diferente", "Sua família planejou um passeio em {{city}}. Como você participa?", "family_time", "Aproveitar com a família", "creative_play", "Explorar o lugar brincando", "rest", "Ficar em um ritmo tranquilo"),
+            s("Uma nova descoberta", "Um objeto curioso chamou sua atenção em casa. O que fazer?", "creative_play", "Investigar e brincar", "family_time", "Chamar alguém da família", "rest", "Descansar"),
+            s("Dia de visita", "Parentes apareceram para uma visita. Como aproveitar?", "family_time", "Ficar perto dos parentes", "join_arts", "Mostrar uma atividade criativa", "rest", "Tirar um tempo tranquilo"),
+            s("Uma atividade no bairro", "Há uma atividade infantil acontecendo no bairro. Qual será sua escolha?", "creative_play", "Participar da brincadeira", "family_time", "Ir acompanhado da família", "rest", "Ficar em casa"),
+            s("Uma pequena comemoração", "Sua família quer comemorar uma data especial. O que você prefere?", "family_time", "Participar da comemoração", "join_arts", "Preparar algo artístico", "rest", "Ter um dia calmo"),
+            s("Hora de aprender", "Você demonstrou curiosidade por algo novo. Como explorar?", "creative_play", "Experimentar na prática", "family_time", "Aprender com a família", "rest", "Observar e descansar"),
+            s("Um dia ao ar livre", "O clima está agradável em {{city}}. Como passar o dia?", "sports_group", "Brincar e se movimentar", "family_time", "Fazer um passeio em família", "rest", "Descansar"),
+            s("Uma história para contar", "Alguém da família quer compartilhar uma história com você.", "family_time", "Ouvir e conversar", "creative_play", "Inventar uma continuação", "rest", "Relaxar")
+        },
+        {
+            s("Uma novidade na escola", "A escola abriu uma atividade diferente. Qual caminho seguir?", "focus_study", "Conhecer o projeto", "join_arts", "Entrar na oficina de arte", "sports_group", "Experimentar o esporte"),
+            s("Uma amizade nova", "Uma criança da turma quer fazer amizade. Como agir?", "social_network", "Conversar e se aproximar", "focus_study", "Convidar para estudar", "sports_group", "Chamar para jogar"),
+            s("Feira de ciências", "Sua turma vai apresentar trabalhos em uma feira. O que escolher?", "focus_study", "Pesquisar e apresentar", "join_arts", "Criar a parte visual", "family_time", "Preparar com a família"),
+            s("Campeonato da escola", "A escola organizou um campeonato entre turmas.", "sports_group", "Participar da equipe", "focus_study", "Ajudar na organização", "join_arts", "Criar cartazes e torcida"),
+            s("Um talento escondido", "Você percebeu que gosta de uma atividade nova.", "join_arts", "Praticar arte e criatividade", "sports_group", "Testar uma modalidade esportiva", "focus_study", "Pesquisar mais sobre o assunto"),
+            s("Trabalho em grupo", "Um trabalho escolar precisa ser dividido entre os colegas.", "focus_study", "Organizar a pesquisa", "social_network", "Coordenar a equipe", "join_arts", "Preparar a apresentação"),
+            s("Convite para brincar", "Colegas chamaram você para uma atividade depois da aula.", "sports_group", "Participar da brincadeira", "social_network", "Conhecer melhor o grupo", "focus_study", "Terminar as tarefas primeiro"),
+            s("Uma apresentação", "Sua turma terá um momento para mostrar o que aprendeu.", "join_arts", "Preparar uma apresentação", "focus_study", "Aprofundar o conteúdo", "family_time", "Ensaiar com a família")
+        },
+        {
+            s("Escolhas para o futuro", "Uma conversa sobre o futuro fez você pensar nos próximos passos.", "study_group", "Montar um plano de estudos", "sports_group", "Entrar em uma equipe", "social_network", "Ampliar seu círculo social"),
+            s("Um convite dos colegas", "Um grupo está organizando uma atividade no fim de semana.", "social_network", "Participar e conhecer pessoas", "sports_group", "Entrar na atividade esportiva", "rest", "Reservar tempo para descansar"),
+            s("Projeto importante", "Um projeto pode ajudar a desenvolver suas habilidades.", "study_group", "Assumir a pesquisa", "join_arts", "Cuidar da criação", "social_network", "Coordenar a comunicação"),
+            s("Preparação para provas", "As avaliações estão chegando e você precisa organizar a rotina.", "study_group", "Criar um cronograma", "sports_group", "Equilibrar estudo e esporte", "rest", "Reduzir compromissos"),
+            s("Uma oportunidade cultural", "Uma atividade cultural gratuita está recebendo inscrições.", "join_arts", "Participar da oficina", "social_network", "Fazer novas amizades", "study_group", "Pesquisar o tema antes"),
+            s("Desafio esportivo", "Uma equipe local convidou você para treinar.", "sports_group", "Aceitar o desafio", "study_group", "Priorizar a escola", "social_network", "Conhecer o grupo primeiro"),
+            s("Planos de independência", "Você começou a pensar em objetivos para os próximos anos.", "study_group", "Pesquisar cursos e profissões", "social_network", "Conversar com pessoas experientes", "rest", "Organizar suas prioridades"),
+            s("Mudanças no grupo", "Seu grupo de amigos está passando por mudanças.", "social_network", "Conversar e fortalecer amizades", "sports_group", "Focar em uma atividade em equipe", "study_group", "Dedicar mais tempo aos estudos")
+        },
+        {
+            s("Uma proposta de trabalho", "Uma oportunidade de renda apareceu em {{city}}. O que fazer?", "work_shift", "Aceitar o trabalho extra", "professional_course", "Investir em qualificação", "social_network", "Conversar com contatos"),
+            s("Planos de carreira", "Você pode dar um passo para desenvolver sua carreira.", "professional_course", "Fazer um curso", "work_shift", "Buscar renda extra", "social_network", "Ampliar contatos profissionais"),
+            s("Uma mudança em casa", "Sua rotina familiar está mudando e exige organização.", "family_time", "Priorizar a família", "work_shift", "Aumentar a renda", "rest", "Reorganizar a rotina"),
+            s("Oportunidade de negócio", "Uma ideia de pequeno negócio começou a ganhar forma.", "professional_course", "Estudar gestão", "social_network", "Procurar parceiros e contatos", "work_shift", "Fazer um trabalho extra para juntar dinheiro"),
+            s("Convite para um evento", "Um evento local pode abrir novas oportunidades.", "social_network", "Participar e conhecer pessoas", "professional_course", "Buscar aprendizado", "rest", "Preservar seu tempo livre"),
+            s("Meta financeira", "Você definiu uma meta financeira para o próximo período.", "work_shift", "Fazer trabalho extra", "professional_course", "Melhorar suas habilidades", "family_time", "Planejar com a família"),
+            s("Um projeto pessoal", "Um projeto antigo pode finalmente sair do papel.", "professional_course", "Aprender o que falta", "social_network", "Buscar apoio e contatos", "rest", "Planejar sem pressa"),
+            s("Equilíbrio na rotina", "Você percebeu que precisa equilibrar trabalho e vida pessoal.", "family_time", "Reservar tempo para pessoas próximas", "rest", "Cuidar do descanso", "work_shift", "Aceitar uma renda extra")
+        },
+        {
+            s("Um projeto comunitário", "A comunidade de {{city}} está organizando uma iniciativa.", "community", "Participar como voluntário", "personal_hobby", "Contribuir com uma habilidade", "family_time", "Convidar a família"),
+            s("Um hobby esquecido", "Você encontrou tempo para retomar um antigo interesse.", "personal_hobby", "Retomar o hobby", "family_time", "Compartilhar com a família", "community", "Participar de um grupo local"),
+            s("Reencontro especial", "Uma pessoa querida entrou em contato para um reencontro.", "family_time", "Organizar o encontro", "community", "Participar de uma atividade em grupo", "personal_hobby", "Reservar um tempo para si"),
+            s("Experiência para compartilhar", "Pessoas mais jovens querem ouvir suas experiências.", "community", "Compartilhar conhecimentos", "personal_hobby", "Registrar suas histórias", "family_time", "Conversar com parentes"),
+            s("Uma nova rotina", "Você está pensando em dar mais variedade aos seus dias.", "personal_hobby", "Começar uma atividade nova", "community", "Conhecer um grupo", "rest", "Priorizar o descanso"),
+            s("Celebração em família", "Sua família está planejando uma reunião especial.", "family_time", "Participar da reunião", "personal_hobby", "Preparar algo de que gosta", "community", "Convidar pessoas da comunidade"),
+            s("Uma causa local", "Uma causa importante para o bairro precisa de apoio.", "community", "Ajudar na iniciativa", "family_time", "Mobilizar a família", "personal_hobby", "Contribuir com uma habilidade"),
+            s("Aprendizado contínuo", "Surgiu a chance de aprender algo que sempre despertou curiosidade.", "personal_hobby", "Começar a aprender", "community", "Entrar em um grupo de aprendizagem", "family_time", "Aprender com alguém da família")
+        }
     };
 
-    private static final String[][] STORIES = {
-        {"Sua família preparou uma surpresa para você. Como deseja aproveitar esse momento?",
-         "Você encontrou algo novo que despertou sua curiosidade. O que vai fazer?",
-         "Hoje há várias possibilidades para brincar, aprender e se divertir. Qual caminho escolhe?",
-         "Pessoas importantes querem passar um tempo com você. Como pretende aproveitar?"},
-        {"Na escola apareceu uma oportunidade diferente. Como você vai participar?",
-         "Alguém com interesses parecidos quer se aproximar. O que você faz?",
-         "Um projeto está sendo organizado e você pode escolher seu papel.",
-         "Uma atividade extracurricular abriu inscrições. Qual será sua decisão?"},
-        {"Você está descobrindo novos interesses e precisa escolher onde investir seu tempo.",
-         "Seus amigos estão organizando algo e você pode participar de várias maneiras.",
-         "Um desafio pessoal pode ajudar você a desenvolver novas habilidades.",
-         "Uma oportunidade de estudo apareceu e pode influenciar seus próximos passos."},
-        {"Uma oportunidade surgiu e pode mudar sua rotina. Como pretende lidar com ela?",
-         "Você precisa escolher onde colocar sua energia neste momento da vida.",
-         "Uma proposta apareceu. Considere seus objetivos antes de decidir.",
-         "Há caminhos diferentes para construir seu futuro. Qual combina com você?"},
-        {"Uma nova experiência pode trazer aprendizado e boas conexões.",
-         "A comunidade está organizando uma atividade e sua participação é bem-vinda.",
-         "Uma ideia antiga pode finalmente sair do papel. Como deseja começar?",
-         "Uma pessoa querida quer reencontrar você. Como pretende aproveitar?"}
-    };
+    private static Scenario s(String title, String story,
+            String a, String al, String b, String bl, String c, String cl) {
+        return new Scenario(title, story, a, al, b, bl, c, cl);
+    }
 
     public static LifeEvent createAnnualEvent(LifeState life) {
         if (life == null) throw new IllegalArgumentException("Vida inválida.");
         int age = Math.max(0, Math.min(120, life.age));
-        int stage;
-        String prefix;
-        String aId, aLabel, bId, bLabel, cId, cLabel;
-
-        if (age < 6) {
-            stage = 0; prefix = "child";
-            aId = "family_time"; aLabel = "Passar o dia com a família";
-            bId = "creative_play"; bLabel = "Explorar e brincar";
-            cId = "rest"; cLabel = "Descansar e recuperar as energias";
-        } else if (age < 12) {
-            stage = 1; prefix = "school";
-            aId = "focus_study"; aLabel = "Dedicar tempo aos estudos";
-            bId = "join_arts"; bLabel = "Participar de uma atividade artística";
-            cId = "sports_group"; cLabel = "Entrar em uma atividade esportiva";
-        } else if (age < 18) {
-            stage = 2; prefix = "teen";
-            aId = "study_group"; aLabel = "Priorizar os estudos";
-            bId = "sports_group"; bLabel = "Participar de um esporte";
-            cId = "social_network"; cLabel = "Conhecer pessoas e fazer amizades";
-        } else if (age < 60) {
-            stage = 3; prefix = "adult";
-            aId = "professional_course"; aLabel = "Investir em qualificação";
-            bId = "social_network"; bLabel = "Ampliar sua rede de contatos";
-            cId = "work_shift"; cLabel = "Aceitar um trabalho extra remunerado";
-        } else {
-            stage = 4; prefix = "senior";
-            aId = "community"; aLabel = "Participar de uma atividade comunitária";
-            bId = "personal_hobby"; bLabel = "Dedicar tempo a um hobby";
-            cId = "family_time"; cLabel = "Aproximar-se da família";
-        }
-
-        int slot = Math.floorMod((life.id == null ? 0 : life.id.hashCode()) + age * 31, 4);
-        String title = TITLES[stage][slot] + " • " + age + " anos";
-        String description = STORIES[stage][slot] + " Você está com " + age + " anos e mora em "
-                + life.city + " (" + life.stateCode + ").";
+        int stage = age < 6 ? 0 : age < 12 ? 1 : age < 18 ? 2 : age < 60 ? 3 : 4;
+        int slot = Math.floorMod(eventSeed(life, age), SCENARIOS[stage].length);
+        Scenario event = SCENARIOS[stage][slot];
+        String city = life.city == null || life.city.trim().isEmpty() ? "sua cidade" : life.city;
+        String description = event.story.replace("{{city}}", city)
+                + " Você tem " + age + " anos, mora em " + city + " (" + life.stateCode + ").";
+        if (life.happiness < 35) description += " Você também tem tentado recuperar o ânimo.";
+        if (life.health < 35) description += " Seu bem-estar merece atenção nesta fase.";
+        if (life.intelligence > 75) description += " Sua dedicação ao aprendizado está se destacando.";
+        if (life.moneyCents > 1000000L) description += " Sua situação financeira permite considerar mais possibilidades.";
+        if (!life.siblings.isEmpty()) description += " Seus irmãos também fazem parte da sua rotina familiar.";
+        String prefix = new String[]{"child", "school", "teen", "adult", "senior"}[stage];
         String eventId = prefix + "_" + life.id + "_" + age + "_" + slot;
+        String title = event.title + " • " + age + " anos";
         return new LifeEvent(life.id, age, eventId, title, description,
-                aId, aLabel, bId, bLabel, cId, cLabel);
+                event.aId, event.aLabel, event.bId, event.bLabel, event.cId, event.cLabel);
+    }
+
+    private static int eventSeed(LifeState life, int age) {
+        int hash = 17;
+        hash = 31 * hash + (life.id == null ? 0 : life.id.hashCode());
+        hash = 31 * hash + age;
+        hash = 31 * hash + (life.city == null ? 0 : life.city.hashCode());
+        hash = 31 * hash + life.happiness / 10;
+        hash = 31 * hash + life.health / 10;
+        hash = 31 * hash + life.intelligence / 10;
+        hash = 31 * hash + life.charisma / 10;
+        hash = 31 * hash + life.discipline / 10;
+        hash = 31 * hash + life.siblings.size();
+        hash = 31 * hash + (int) (life.moneyCents / 10000L);
+        return hash ^ (hash >>> 16);
     }
 
     /** Atividade rápida: muda atributos/histórico, mas nunca altera a idade. */
@@ -199,4 +223,14 @@ public final class LifeEngine {
     }
 
     private static int clamp(int value) { return Math.max(0, Math.min(100, value)); }
+
+    private static final class Scenario {
+        final String title, story, aId, aLabel, bId, bLabel, cId, cLabel;
+        Scenario(String title, String story, String aId, String aLabel,
+                 String bId, String bLabel, String cId, String cLabel) {
+            this.title = title; this.story = story;
+            this.aId = aId; this.aLabel = aLabel; this.bId = bId; this.bLabel = bLabel;
+            this.cId = cId; this.cLabel = cLabel;
+        }
+    }
 }
