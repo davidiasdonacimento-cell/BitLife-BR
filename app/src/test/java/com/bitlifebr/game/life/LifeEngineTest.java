@@ -71,6 +71,37 @@ public class LifeEngineTest {
         LifeEngine.applyChoice(afterFirstChoice, event, "family_time");
     }
 
+
+    @Test
+    public void thirdAnnualChoiceAdvancesAgeAndChangesAttributes() {
+        LifeState life = LifeFactory.create(null, "create", "Caio", "Mendes",
+                "19/11/2000", "Masculino", "equilibrado", "BA", "Salvador",
+                false, "", "", 0, new Random(10));
+        life.age = 26;
+        LifeEvent event = LifeEngine.createAnnualEvent(life);
+
+        LifeState next = LifeEngine.applyChoice(life, event, event.choiceCId);
+
+        assertEquals(27, next.age);
+        assertEquals(7500L, next.moneyCents);
+        assertEquals(26, life.age);
+        assertTrue(next.history.get(next.history.size() - 1).contains(event.choiceCLabel));
+    }
+
+    @Test
+    public void quickActivityChangesStatsWithoutAdvancingAge() {
+        LifeState life = LifeFactory.create(null, "create", "Lia", "Souza",
+                "19/11/2010", "Feminino", "criativo", "BA", "Salvador",
+                false, "", "", 0, new Random(11));
+        life.age = 15;
+
+        LifeState next = LifeEngine.applyActivity(life, "sports_group");
+
+        assertEquals(15, next.age);
+        assertTrue(next.health > life.health);
+        assertTrue(next.history.size() > life.history.size());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void eventRejectsChoiceFromAnotherEvent() {
         LifeState life = LifeFactory.create(null, "create", "João", "Dias",
