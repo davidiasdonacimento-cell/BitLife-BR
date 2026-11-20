@@ -71,10 +71,18 @@ final class InstalledContentCatalog {
                     description,
                     actionFor(category, 0), choiceLabel(choices, 0),
                     actionFor(category, 1), choiceLabel(choices, 1),
-                    actionFor(category, 2), choiceLabel(choices, 2));
+                    actionFor(category, 2), choiceLabel(choices, 2),
+                    choiceEffects(choices, 0), choiceEffects(choices, 1),
+                    choiceEffects(choices, 2));
         } catch (Exception ignored) {
             return null;
         }
+    }
+
+    private static JSONObject choiceEffects(JSONArray choices, int index) {
+        JSONObject choice = choices.optJSONObject(index);
+        JSONObject effects = choice == null ? null : choice.optJSONObject("effects");
+        return effects == null ? null : new JSONObject(effects.toString());
     }
 
     private static String choiceLabel(JSONArray choices, int index) {
