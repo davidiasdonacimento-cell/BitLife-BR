@@ -178,45 +178,81 @@ public final class MainActivity extends Activity {
     private void showLife() {
         currentPage = "life";
         if (currentLife == null) { showHome(); return; }
-        LinearLayout root = screen("MINHA VIDA", "Suas decisões, seus resultados.");
-        addProfileCard(root);
-        addSection(root, "ATRIBUTOS");
-        addStat(root, " Saúde", currentLife.health, GREEN);
-        addStat(root, " Felicidade", currentLife.happiness, ORANGE);
-        addStat(root, " Inteligência", currentLife.intelligence, BLUE);
-        addStat(root, " Aparência", currentLife.appearance, PURPLE);
-        addStat(root, " Carisma", currentLife.charisma, BLUE);
-        addStat(root, " Disciplina", currentLife.discipline, GREEN);
-        addStat(root, " Popularidade", currentLife.popularity, ORANGE);
-        addCardText(root, " Dinheiro", formatMoney(currentLife.moneyCents),
-                currentLife.alive ? "Saldo atual da sua vida" : "A vida foi encerrada");
 
-        addSection(root, "ATIVIDADES");
-        addText(root, "Escolha uma atividade. Ela altera seus atributos e o histórico, mas não passa o ano.", 13, MUTED);
+        LinearLayout root = screen("RESUMO DA VIDA", "Acompanhe seus indicadores e decida o próximo passo.");
+        addProfileCard(root);
+
+        addSection(root, "INDICADORES PESSOAIS");
+        addStatsGrid(root);
+        addCardText(root, "DINHEIRO", formatMoney(currentLife.moneyCents),
+                currentLife.alive ? "Saldo disponível nesta vida" : "Registro financeiro da vida encerrada");
+
+        addSection(root, "ACONTECIMENTO ANUAL");
+        if (currentLife.alive) {
+            addChoiceCard(root, "", "AVANÇAR PARA O PRÓXIMO ANO",
+                    "Encontre um novo acontecimento e escolha entre três decisões. A idade só avança quando você confirma uma opção.",
+                    GREEN, this::showAnnualEvent);
+        } else {
+            addCardText(root, "Esta vida foi encerrada",
+                    "Escolha um descendente ou inicie uma nova vida para continuar jogando.");
+        }
+
+        addSection(root, "GERENCIAR SUA VIDA");
+        addChoiceCard(root, "", "Atividades",
+                "Estudos, lazer, esporte, convivência e outras ações disponíveis para sua idade.",
+                BLUE, this::showActivities);
+        addChoiceCard(root, "", "Família",
+                "Consulte responsáveis, irmãos e vínculos familiares.",
+                PURPLE, this::showFamily);
+        addChoiceCard(root, "", "Histórico",
+                currentLife.history.size() + " acontecimentos registrados nesta vida.",
+                ORANGE, this::showHistory);
+        addChoiceCard(root, "", "Legado e vidas salvas",
+                "Alterne entre personagens e continue pela próxima geração.",
+                GREEN, this::showLives);
+        addChoiceCard(root, "", "Conquistas",
+                "Consulte os marcos alcançados durante esta história.",
+                BLUE, this::showAchievements);
+        addChoiceCard(root, "", "Central de conteúdo",
+                "Instale e atualize os recursos adicionais do jogo.",
+                PURPLE, () -> startActivity(new Intent(this, ContentPackActivity.class)));
+
+        addFooter(root, "Seu progresso é salvo localmente. Atividades não avançam a idade.");
+    }
+
+    private void showActivities() {
+        currentPage = "activities";
+        if (currentLife == null) { showHome(); return; }
+        LinearLayout root = screen("ATIVIDADES", "Escolha o que fazer nesta fase da vida.");
+
+        addProfileCard(root);
+        if (!currentLife.alive) {
+            addCardText(root, "Atividades indisponíveis",
+                    "Esta vida foi encerrada. Escolha um descendente para continuar a história.");
+            addButton(root, "ABRIR LEGADO", this::showLives, true);
+            return;
+        }
+
+        addCardText(root, "Ações do dia a dia",
+                "Estas atividades alteram os atributos e o histórico, mas não passam o ano.",
+                "Disponíveis para " + ageStage(currentLife.age).toLowerCase(Locale.ROOT));
+
+        addSection(root, "ESCOLHAS DISPONÍVEIS");
         for (QuickAction action : quickActions(currentLife)) {
-            addChoiceCard(root, action.icon, action.title, action.description,
+            addChoiceCard(root, "", action.title, action.description,
                     action.color, () -> performActivity(action.id));
         }
 
-        addSection(root, "PRÓXIMO ANO");
-        addChoiceCard(root, "", "Um novo ano está esperando por você",
-                "Avance para receber um acontecimento da sua fase de vida e escolher entre três caminhos.",
-                GREEN, this::showAnnualEvent);
-        addSection(root, "SUA VIDA");
-        addChoiceCard(root, "", "Minha família",
-                "Veja responsáveis, irmãos e vínculos da sua vida.", BLUE, this::showFamily);
-        addChoiceCard(root, "", "Minha história",
-                currentLife.history.size() + " acontecimentos registrados.", PURPLE, this::showHistory);
-        addChoiceCard(root, "", "Vidas e legado",
-                "Troque de personagem ou crie uma nova geração.", ORANGE, this::showLives);
-        addChoiceCard(root, "", "Central de conteúdo",
-                "Instalação e atualização de recursos do jogo.", BLUE,
-                () -> startActivity(new Intent(this, ContentPackActivity.class)));
-        addBottomNavigation(root);
-        addFooter(root, "A idade só muda quando você escolhe avançar um ano.");
+        addSection(root, "OUTRAS ÁREAS");
+        addChoiceCard(root, "", "Família",
+                "Veja os membros da família e passe tempo com eles.",
+                PURPLE, this::showFamily);
+        addChoiceCard(root, "", "Histórico",
+                "Revise as decisões já registradas.",
+                BLUE, this::showHistory);
     }
 
-    private void addProfileCard(LinearLayout root) {
+        private void addProfileCard(LinearLayout root) {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.HORIZONTAL);
         card.setGravity(Gravity.CENTER_VERTICAL);
@@ -465,33 +501,41 @@ public final class MainActivity extends Activity {
         addButton(root, "Voltar à minha vida", this::showLife, true);
     }
 
-    private void addBottomNavigation(LinearLayout root) {
-        addSection(root, "ATALHOS");
-        LinearLayout row = new LinearLayout(this);
-        row.setOrientation(LinearLayout.HORIZONTAL);
-        row.setGravity(Gravity.CENTER);
-        addNavButton(row, "\nVida", this::showLife);
-        addNavButton(row, "\nFamília", this::showFamily);
-        addNavButton(row, "\nHistória", this::showHistory);
-        addNavButton(row, "\nLegado", this::showLives);
-        root.addView(row, match());
+    private void addBottomNavigation(LinearLayout container) {
+        LinearLayout bar = new LinearLayout(this);
+        bar.setOrientation(LinearLayout.HORIZONTAL);
+        bar.setGravity(Gravity.CENTER);
+        bar.setPadding(dp(5), dp(6), dp(5), dp(6));
+        bar.setBackground(round(PANEL, 0));
+
+        addNavButton(bar, "Vida", this::showLife, "life".equals(currentPage));
+        addNavButton(bar, "Atividades", this::showActivities, "activities".equals(currentPage));
+        addNavButton(bar, "Família", this::showFamily, "family".equals(currentPage));
+        addNavButton(bar, "Legado", this::showLives, "lives".equals(currentPage));
+
+        container.addView(bar, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
-    private void addNavButton(LinearLayout row, String label, Runnable action) {
+    private void addNavButton(LinearLayout row, String label, Runnable action, boolean selected) {
         Button button = new Button(this);
         button.setText(label);
         button.setAllCaps(false);
         button.setTextSize(11);
-        button.setTextColor(TEXT);
-        button.setMinHeight(dp(54));
-        button.setBackground(round(PANEL_ALT, 12));
+        button.setTypeface(Typeface.DEFAULT, selected ? Typeface.BOLD : Typeface.NORMAL);
+        button.setTextColor(selected ? Color.WHITE : TEXT);
+        button.setMinHeight(dp(44));
+        button.setPadding(dp(2), 0, dp(2), 0);
+        button.setBackground(round(selected ? GREEN : PANEL, 10));
         button.setOnClickListener(v -> action.run());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-        params.setMargins(dp(3), dp(3), dp(3), dp(3));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+        params.setMargins(dp(2), dp(2), dp(2), dp(2));
         row.addView(button, params);
     }
 
-    private void addHero(LinearLayout root, String icon, String title, String detail) {
+        private void addHero(LinearLayout root, String icon, String title, String detail) {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.VERTICAL);
         card.setGravity(Gravity.CENTER);
@@ -521,6 +565,64 @@ public final class MainActivity extends Activity {
         label.setLetterSpacing(0.06f);
         label.setPadding(0, dp(17), 0, dp(8));
         root.addView(label, match());
+    }
+
+    private void addStatsGrid(LinearLayout root) {
+        addStatRow(root, "Saúde", currentLife.health, GREEN,
+                "Felicidade", currentLife.happiness, ORANGE);
+        addStatRow(root, "Inteligência", currentLife.intelligence, BLUE,
+                "Aparência", currentLife.appearance, PURPLE);
+        addStatRow(root, "Carisma", currentLife.charisma, BLUE,
+                "Disciplina", currentLife.discipline, GREEN);
+        addStatRow(root, "Popularidade", currentLife.popularity, ORANGE,
+                null, 0, MUTED);
+    }
+
+    private void addStatRow(LinearLayout root, String firstLabel, int firstValue, int firstColor,
+                            String secondLabel, int secondValue, int secondColor) {
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER_VERTICAL);
+        addStatTile(row, firstLabel, firstValue, firstColor);
+        if (secondLabel != null) {
+            addStatTile(row, secondLabel, secondValue, secondColor);
+        } else {
+            View spacer = new View(this);
+            row.addView(spacer, new LinearLayout.LayoutParams(0, dp(2), 1f));
+        }
+        LinearLayout.LayoutParams params = match();
+        params.bottomMargin = dp(2);
+        root.addView(row, params);
+    }
+
+    private void addStatTile(LinearLayout row, String label, int value, int color) {
+        LinearLayout tile = new LinearLayout(this);
+        tile.setOrientation(LinearLayout.VERTICAL);
+        tile.setPadding(dp(11), dp(10), dp(11), dp(10));
+        tile.setBackground(round(PANEL, 11));
+
+        LinearLayout.LayoutParams tileParams = new LinearLayout.LayoutParams(
+                0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+        tileParams.setMargins(dp(3), dp(3), dp(3), dp(3));
+        row.addView(tile, tileParams);
+
+        TextView name = text(label.toUpperCase(Locale.ROOT), 10, MUTED);
+        name.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        tile.addView(name, match());
+
+        TextView amount = text(Math.max(0, Math.min(100, value)) + "/100", 17, TEXT);
+        amount.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        amount.setPadding(0, dp(3), 0, dp(5));
+        tile.addView(amount, match());
+
+        ProgressBar progress = new ProgressBar(this, null,
+                android.R.attr.progressBarStyleHorizontal);
+        progress.setMax(100);
+        progress.setProgress(Math.max(0, Math.min(100, value)));
+        progress.setProgressTintList(android.content.res.ColorStateList.valueOf(color));
+        progress.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                Color.rgb(226, 231, 226)));
+        tile.addView(progress, match());
     }
 
     private void addStat(LinearLayout root, String label, int value, int color) {
@@ -633,32 +735,46 @@ public final class MainActivity extends Activity {
     }
 
     private LinearLayout screen(String title, String subtitle) {
+        LinearLayout container = new LinearLayout(this);
+        container.setOrientation(LinearLayout.VERTICAL);
+        container.setBackgroundColor(BG);
+
         ScrollView scroll = new ScrollView(this);
         scroll.setFillViewport(true);
         scroll.setBackgroundColor(BG);
+
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dp(16), dp(18), dp(16), dp(24));
+        root.setPadding(dp(16), dp(16), dp(16), dp(20));
+
         TextView brand = text("BITLIFE BR  /  SIMULADOR DE VIDA", 10, GREEN);
         brand.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         brand.setLetterSpacing(0.10f);
         root.addView(brand, match());
-        TextView heading = text(title, 23, TEXT);
+
+        TextView heading = text(title, 22, TEXT);
         heading.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         heading.setPadding(0, dp(7), 0, 0);
         root.addView(heading, match());
-        heading.setAlpha(0f);
-        heading.setTranslationY(dp(8));
-        heading.animate().alpha(1f).translationY(0f).setDuration(420L).start();
+
         TextView sub = text(subtitle, 13, MUTED);
         sub.setPadding(0, dp(4), 0, dp(12));
         root.addView(sub, match());
+
         scroll.addView(root);
-        setContentView(scroll);
+        container.addView(scroll, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        if (currentLife != null && !"home".equals(currentPage)
+                && !"start".equals(currentPage) && !"create".equals(currentPage)) {
+            addBottomNavigation(container);
+        }
+
+        setContentView(container);
         return root;
     }
 
-    private EditText addEdit(LinearLayout root, String label, String initial) {
+        private EditText addEdit(LinearLayout root, String label, String initial) {
         addLabel(root, label);
         EditText edit = new EditText(this);
         edit.setSingleLine(true);
@@ -794,7 +910,7 @@ public final class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if ("event".equals(currentPage) || "result".equals(currentPage)
+        if ("activities".equals(currentPage) || "event".equals(currentPage) || "result".equals(currentPage)
                 || "family".equals(currentPage) || "history".equals(currentPage)
                 || "lives".equals(currentPage) || "descendants".equals(currentPage)
                 || "achievements".equals(currentPage)) {
