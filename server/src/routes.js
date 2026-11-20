@@ -4,7 +4,9 @@ import { z } from "zod";
 import { pool } from "./db.js";
 import { auth, issueToken, newId } from "./security.js";
 import { createSessionNpcs } from "./npcs.js";
+import { contentRouter } from "./content.js";
 export const router = Router();
+router.use("/content", contentRouter);
 const credentials = z.object({ email: z.string().email().max(254), password: z.string().min(8).max(72) });
 const initialState = () => ({ character: null, year: 0, money: 0, inventory: [], family: [], history: [], lastEventId: null });
 router.post("/auth/register", async (req,res,next) => {
