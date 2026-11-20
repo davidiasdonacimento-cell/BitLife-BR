@@ -76,7 +76,7 @@ public final class LifeEngine {
         if (life == null) throw new IllegalArgumentException("Vida inválida.");
         int age = Math.max(0, Math.min(120, life.age));
         int stage = age < 6 ? 0 : age < 12 ? 1 : age < 18 ? 2 : age < 60 ? 3 : 4;
-        int slot = Math.floorMod(eventSeed(life, age), SCENARIOS[stage].length);
+        int slot = Math.floorMod(eventSeed(life) + age, SCENARIOS[stage].length);
         Scenario event = SCENARIOS[stage][slot];
         String city = life.city == null || life.city.trim().isEmpty() ? "sua cidade" : life.city;
         String description = event.story.replace("{{city}}", city)
@@ -93,10 +93,9 @@ public final class LifeEngine {
                 event.aId, event.aLabel, event.bId, event.bLabel, event.cId, event.cLabel);
     }
 
-    private static int eventSeed(LifeState life, int age) {
+    private static int eventSeed(LifeState life) {
         int hash = 17;
         hash = 31 * hash + (life.id == null ? 0 : life.id.hashCode());
-        hash = 31 * hash + age;
         hash = 31 * hash + (life.city == null ? 0 : life.city.hashCode());
         hash = 31 * hash + life.happiness / 10;
         hash = 31 * hash + life.health / 10;
