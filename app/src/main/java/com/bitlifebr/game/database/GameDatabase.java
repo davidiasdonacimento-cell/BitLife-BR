@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.bitlifebr.game.character.CharacterState;
 import com.bitlifebr.game.life.LifeFactory;
 import com.bitlifebr.game.life.LifeState;
+import com.bitlifebr.game.life.LifeEvent;
+import com.bitlifebr.game.life.LifeEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +99,33 @@ public final class GameDatabase extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+
+
+    /** Grava o avanço anual em uma transação e rejeita eventos duplicados/desatualizados. */
+    public LifeState applyAnnualChoice(LifeEvent event, String choiceId) {
+        if (event == null) throw new IllegalArgumentException("Evento inválido.");
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            LifeState current;
+            String rowId;
+            try (Cursor cursor = db.query("game_lives", new String[]{"id", "state_json"},
+                    "is_active = ?", new String[]{"1"}, null, null, "updated_at DESC", "1")) {
+                if (!cursor.moveToFirst()) throw new IllegalStateException("Nenhuma vida ativa foi encontrada.");
+                rowId = cursor.getString(0);
+                current = LifeState.deserialize(cursor.getString(1));
+            }
+            if (event.lifeId != null && !event.lifeId.equals(current.id))
+                throw new IllegalStateException("A vida ativa mudou. Abra o personagem novamente.");
+            if (event.ageAtCreation >= 0 && event.ageAtCreation != current.age)
+                throw new IllegalStateException("Este ano já foi processado. O progresso não foi duplicado.");
+            LifeState next = LifeEngine.applyChoice(current, event, choiceId);
+            int changed = db.update("game_lives", lifeValues(next, true), "id = ?", new String[]{rowId});
+            if (changed != 1) throw new IllegalStateException("Não foi possível salvar o avanço anual.");
+            db.setTransactionSuccessful();
+            return next;
+        } finally { db.endTransaction(); }
     }
 
     public LifeState loadActiveLife() {
