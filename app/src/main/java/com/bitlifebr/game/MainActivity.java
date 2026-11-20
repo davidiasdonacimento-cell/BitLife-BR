@@ -2,6 +2,7 @@ package com.bitlifebr.game;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -77,6 +78,8 @@ public final class MainActivity extends Activity {
         }, currentLife != null);
         addButton(root, "Legado e vidas salvas", this::showLives, false);
         addButton(root, "Conquistas", this::showAchievements, false);
+        addButton(root, "Central de conteúdo • baixar recursos",
+                () -> startActivity(new Intent(this, ContentPackActivity.class)), false);
         addFooter(root, "Android nativo • Saves locais protegidos contra sobrescrita entre vidas");
         setScreen(root);
     }
@@ -222,10 +225,15 @@ public final class MainActivity extends Activity {
                 .setMessage(event.description)
                 .setItems(new String[]{event.choiceALabel, event.choiceBLabel}, (dialog, which) -> {
                     String choiceId = which == 0 ? event.choiceAId : event.choiceBId;
-                    currentLife = LifeEngine.applyChoice(currentLife, event, choiceId);
-                    database.saveLife(currentLife);
-                    Toast.makeText(this, "Escolha registrada e progresso salvo.", Toast.LENGTH_SHORT).show();
-                    showLife();
+                    try {
+                        currentLife = database.applyAnnualChoice(event, choiceId);
+                        Toast.makeText(this, "Ano avançado e progresso salvo.", Toast.LENGTH_SHORT).show();
+                        showLife();
+                    } catch (IllegalArgumentException | IllegalStateException error) {
+                        currentLife = database.loadActiveLife();
+                        message("Progresso atualizado", error.getMessage() + "\\nA vida foi recarregada para evitar avanço duplicado.");
+                        showLife();
+                    }
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
