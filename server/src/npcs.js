@@ -4,7 +4,7 @@ const cities = ["Salvador","Feira de Santana","São Paulo","Rio de Janeiro","Bel
 const pick = a => a[Math.floor(Math.random() * a.length)];
 export function createSessionNpcs() {
   return Array.from({ length: 12 }, (_, i) => ({
-    id: `npc_${i + 1}`,
+    id: randomUUID(),
     name: `${pick(firstNames)} ${pick(surnames)}`,
     age: 18 + Math.floor(Math.random() * 48),
     city: pick(cities),
