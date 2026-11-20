@@ -208,32 +208,68 @@ public final class ContentPackActivity extends Activity {
     }
 
     private File extract(File zipFile,String version)throws Exception{
-        File root=new File(getFilesDir(),"bitlife-content");if(!root.exists()&&!root.mkdirs())throw new IllegalStateException("Falha ao criar pasta de conteúdo.");
-        String safe=version.replaceAll("[^A-Za-z0-9._-]","_");File temp=new File(root,".staging_"+safe+"_"+System.currentTimeMillis());
+        File root=new File(getFilesDir(),"bitlife-content");
+        if(!root.exists()&&!root.mkdirs())throw new IllegalStateException("Falha ao criar pasta de conteúdo.");
+        String safe=version.replaceAll("[^A-Za-z0-9._-]","_");
+        File temp=new File(root,".staging_"+safe+"_"+System.currentTimeMillis());
         if(!temp.mkdirs())throw new IllegalStateException("Falha ao preparar extração.");
-        File canonicalRoot=temp.getCanonicalFile();long bytes=0;int entries=0;
-        try(ZipInputStream zip=new ZipInputStream(new BufferedInputStream(new FileInputStream(zipFile)))){
-            ZipEntry entry;byte[] buffer=new byte[65536];
-            while((entry=zip.getNextEntry())!=null){
-                if(++entries>50000)throw new IllegalStateException("Arquivos demais no pacote.");
-                File outFile=new File(temp,entry.getName());String path=outFile.getCanonicalPath();
-                if(!path.equals(canonicalRoot.getPath())&&!path.startsWith(canonicalRoot.getPath()+File.separator))
-                    throw new IllegalStateException("Caminho inseguro no ZIP.");
-                if(entry.isDirectory()){if(!outFile.exists()&&!outFile.mkdirs())throw new IllegalStateException("Falha ao criar diretório.");}
-                else{File parent=outFile.getParentFile();if(parent!=null&&!parent.exists()&&!parent.mkdirs())throw new IllegalStateException("Falha ao criar pasta.");
-                    try(FileOutputStream out=new FileOutputStream(outFile)){int len;while((len=zip.read(buffer))!=-1){bytes+=len;
-                        if(bytes>MAX_UNPACKED)throw new IllegalStateException("Pacote excede o limite de extração.");out.write(buffer,0,len);}}}
-                zip.closeEntry();
+        try{
+            File canonicalRoot=temp.getCanonicalFile();
+            long bytes=0;int entries=0;
+            try(ZipInputStream zip=new ZipInputStream(new BufferedInputStream(new FileInputStream(zipFile)))){
+                ZipEntry entry;byte[] buffer=new byte[65536];
+                while((entry=zip.getNextEntry())!=null){
+                    if(++entries>50000)throw new IllegalStateException("Arquivos demais no pacote.");
+                    File outFile=new File(temp,entry.getName());String path=outFile.getCanonicalPath();
+                    if(!path.equals(canonicalRoot.getPath())&&!path.startsWith(canonicalRoot.getPath()+File.separator))
+                        throw new IllegalStateException("Caminho inseguro no ZIP.");
+                    if(entry.isDirectory()){
+                        if(!outFile.exists()&&!outFile.mkdirs())throw new IllegalStateException("Falha ao criar diretório.");
+                    }else{
+                        File parent=outFile.getParentFile();
+                        if(parent!=null&&!parent.exists()&&!parent.mkdirs())throw new IllegalStateException("Falha ao criar pasta.");
+                        try(FileOutputStream out=new FileOutputStream(outFile)){
+                            int len;while((len=zip.read(buffer))!=-1){
+                                bytes+=len;if(bytes>MAX_UNPACKED)throw new IllegalStateException("Pacote excede o limite de extração.");
+                                out.write(buffer,0,len);
+                            }
+                        }
+                    }
+                    if(entries%25==0){
+                        final int currentCount=entries;final String currentName=entry.getName();
+                        runOnUiThread(()->detail.setText("Extraindo "+currentName+" • "+currentCount+" itens processados"));
+                    }
+                    zip.closeEntry();
+                }
             }
-        }catch(Exception e){removeTree(temp);throw e;}
-        File meta=new File(temp,"manifest.json");if(!meta.isFile()||bytes<=0){removeTree(temp);throw new IllegalStateException("manifest.json não encontrado no ZIP.");}
-        String json;try(InputStream in=new FileInputStream(meta);ByteArrayOutputStream out=new ByteArrayOutputStream()){
-            byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1){if(out.size()+n>1048576)throw new IllegalStateException("Manifesto interno muito grande.");out.write(b,0,n);}json=out.toString("UTF-8");}
-        JSONObject internal=new JSONObject(json);
-        if(!version.equals(internal.optString("version"))||internal.optInt("schemaVersion",0)<1){removeTree(temp);throw new IllegalStateException("Versão/schema interno incompatível.");}
-        File target=new File(root,"v_"+safe);if(target.exists()){removeTree(temp);return target;}
-        if(!temp.renameTo(target)){removeTree(temp);throw new IllegalStateException("Falha ao finalizar a instalação.");}
-        return target;
+            File meta=new File(temp,"manifest.json");
+            if(!meta.isFile()||bytes<=0)throw new IllegalStateException("manifest.json não encontrado no ZIP.");
+            String json;
+            try(InputStream in=new FileInputStream(meta);ByteArrayOutputStream out=new ByteArrayOutputStream()){
+                byte[] b=new byte[8192];int n;
+                while((n=in.read(b))!=-1){
+                    if(out.size()+n>1048576)throw new IllegalStateException("Manifesto interno muito grande.");
+                    out.write(b,0,n);
+                }
+                json=out.toString("UTF-8");
+            }
+            JSONObject internal=new JSONObject(json);
+            if(!version.equals(internal.optString("version"))||internal.optInt("schemaVersion",0)<1)
+                throw new IllegalStateException("Versão/schema interno incompatível.");
+            File target=new File(root,"v_"+safe);
+            File backup=new File(root,".previous_"+safe+"_"+System.currentTimeMillis());
+            if(target.exists()&&!target.renameTo(backup))
+                throw new IllegalStateException("Não foi possível preparar a atualização do conteúdo instalado.");
+            if(!temp.renameTo(target)){
+                if(backup.exists())backup.renameTo(target);
+                throw new IllegalStateException("Falha ao finalizar a instalação.");
+            }
+            if(backup.exists())removeTree(backup);
+            return target;
+        }catch(Exception e){
+            removeTree(temp);
+            throw e;
+        }
     }
 
     private void cancelDownload(){
