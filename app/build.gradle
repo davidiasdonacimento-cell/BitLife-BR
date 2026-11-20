@@ -1,11 +1,8 @@
-plugins {
-    id 'com.android.application'
-}
+plugins { id 'com.android.application' }
 
 android {
     namespace 'com.bitlifebr.game'
     compileSdk 35
-
     defaultConfig {
         applicationId 'com.bitlifebr.game'
         minSdk 23
@@ -13,18 +10,13 @@ android {
         versionCode 1
         versionName '1.0.0'
         testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        buildConfigField 'String', 'API_BASE_URL', '""'
     }
-
+    buildFeatures { buildConfig true }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
+    testOptions { unitTests.returnDefaultValues = true }
 }
-
-dependencies {
-    testImplementation 'junit:junit:4.13.2'
-}
+dependencies { testImplementation 'junit:junit:4.13.2' }
