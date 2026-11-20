@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -203,7 +204,15 @@ public final class ContentPackActivity extends Activity {
                 runOnUiThread(()->{bar.setIndeterminate(false);bar.setProgress(1000);percent.setText("100%");
                     size.setText(format(pack.sizeBytes)+" • instalado");update("Conteúdo instalado",
                     "ETAPA 4/4 • CONCLUÍDO","Versão "+pack.version+" extraída em "+installed.getAbsolutePath(),false);
-                    action.setText("Verificar atualizações");action.setEnabled(true);action.setOnClickListener(v->refreshManifest());});
+                    action.setText("Conteúdo instalado • reiniciando jogo");action.setEnabled(false);
+                    action.setOnClickListener(v->refreshManifest());
+                    handler.postDelayed(()->{
+                        Intent restart=new Intent(ContentPackActivity.this,MainActivity.class);
+                        restart.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(restart);
+                        finish();
+                    },1200L);
+                });
             }catch(Exception e){extracting=false;fail("Pacote não instalado: "+message(e));}
         },"bitlife-pack-verify-extract").start();
     }
