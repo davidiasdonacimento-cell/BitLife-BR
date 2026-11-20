@@ -25,11 +25,14 @@ final class InstalledContentCatalog {
         try {
             SharedPreferences prefs = context.getSharedPreferences("content_pack", Context.MODE_PRIVATE);
             String installedPath = prefs.getString("installed_path", "");
-            if (installedPath == null || installedPath.trim().isEmpty()) return null;
-            File catalog = new File(new File(installedPath), "catalogs/events.json");
-            if (!catalog.isFile() || catalog.length() <= 2 || catalog.length() > 32L * 1024L * 1024L) return null;
+            File catalog = installedPath == null || installedPath.trim().isEmpty()
+                    ? null : new File(new File(installedPath), "catalogs/events.json");
+            boolean useAsset = catalog == null || !catalog.isFile();
+            if (!useAsset && (catalog.length() <= 2 || catalog.length() > 32L * 1024L * 1024L)) return null;
             String source;
-            try (InputStream in = new FileInputStream(catalog);
+            try (InputStream in = useAsset
+                    ? context.getAssets().open("catalogs/events.json")
+                    : new FileInputStream(catalog);
                  ByteArrayOutputStream out = new ByteArrayOutputStream()) {
                 byte[] buffer = new byte[16384];
                 int count;
