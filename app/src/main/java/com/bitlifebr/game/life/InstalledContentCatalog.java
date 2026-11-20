@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -82,7 +83,12 @@ final class InstalledContentCatalog {
     private static JSONObject choiceEffects(JSONArray choices, int index) {
         JSONObject choice = choices.optJSONObject(index);
         JSONObject effects = choice == null ? null : choice.optJSONObject("effects");
-        return effects == null ? null : new JSONObject(effects.toString());
+        if (effects == null) return null;
+        try {
+            return new JSONObject(effects.toString());
+        } catch (JSONException ignored) {
+            return null;
+        }
     }
 
     private static String choiceLabel(JSONArray choices, int index) {
