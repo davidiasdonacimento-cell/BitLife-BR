@@ -2,36 +2,36 @@
 
 Simulador de vida ambientado no Brasil, desenvolvido como aplicativo Android nativo em Java 17.
 
-## Direção oficial do projeto
+## Direção oficial
 
-- **Android nativo:** Java 17 + Android SDK + Gradle; sem Godot e sem WebView.
-- **Modelo online:** conta individual, salvamento na nuvem e escolhas validadas pelo servidor.
-- **Sem multiplayer:** jogadores não se encontram nem interagem entre si.
-- **NPCs:** personagens fictícios gerados pelo servidor para cada sessão e persistidos durante aquela sessão.
-- **Persistência:** PostgreSQL na nuvem e SQLite local como proteção/cache; atualizações não devem apagar saves.
-- **Segurança:** senha com hash, token de sessão, validação no backend e controle de revisão para evitar sobrescrita de progresso.
-- **Idiomas:** português brasileiro e inglês.
-- **Build Android:** GitHub Actions.
+- Android nativo: Java 17 + Android SDK + Gradle; sem Godot e sem WebView.
+- Experiência online planejada: conta individual, universos isolados e saves privados.
+- Sem multiplayer ou interação jogador-jogador.
+- Backend Node.js + PostgreSQL; SQLite local para persistência e recuperação.
+- Português brasileiro como idioma principal.
+- Não declarar recursos concluídos sem implementação e teste.
 
-## Sistemas planejados para o jogo
+## Primeira etapa jogável
 
-Personagem e atributos; família, parentes e gerações; amizades, namoro, casamento e filhos; escola, notas, ENEM, faculdade e cursos técnicos; profissões, empresas, promoções e aposentadoria; dinheiro, despesas, impostos simulados e herança; imóveis e veículos; saúde e atividades; todos os estados brasileiros, DF e municípios; eventos regionais e milhares de acontecimentos com escolhas, variações e consequências; fama, redes sociais fictícias, pets, conquistas e múltiplos saves.
+Na branch `feature/android-foundation-v1`, a primeira etapa inclui:
+- Tela inicial com Nova vida, Continuar, Legado e Conquistas.
+- Fluxo para criar personagem, iniciar como filho/filha ou selecionar um descendente salvo.
+- Formulário com identidade, nascimento, gênero, personalidade e localização.
+- Geração ou personalização dos responsáveis e escolha da quantidade de irmãos.
+- Múltiplas vidas salvas localmente, com migração aditiva do save antigo.
+- Eventos anuais com duas escolhas, efeitos nos atributos e histórico.
 
-Os sistemas serão implementados em módulos e conectados entre si. A lista acima é o escopo planejado, não uma afirmação de que todos já estão prontos.
+## Planejamento completo
 
-## Estrutura atual
-
-- `app/`: aplicativo Android.
-- `server/`: API Node.js + PostgreSQL para contas, saves na nuvem, sessões e escolhas validadas.
-- `.github/workflows/`: testes e compilação automatizada.
+Consulte [docs/PLANEJAMENTO_COMPLETO.md](docs/PLANEJAMENTO_COMPLETO.md) para todas as decisões confirmadas, a arquitetura e os módulos ainda pendentes.
 
 ## API online
 
 Consulte [server/README.md](server/README.md). Configure `DATABASE_URL` e `JWT_SECRET` no provedor de hospedagem. Nunca coloque segredos no Git.
 
-Rotas principais: cadastro/login, perfil, criação e recuperação de sessão de NPCs, leitura e gravação de save com revisão, e envio de escolhas para validação no servidor.
+A API já possui uma base de autenticação, sessões isoladas, save com revisão e validação inicial de escolhas. O cliente Android ainda precisa de URL de produção, tela de conta e fluxo de sincronização antes que o jogo possa ser considerado online em produção.
 
-## Compilar Android
+## Compilar e testar
 
 Requisitos: JDK 17, Android SDK 35 e Gradle 8.9.
 
@@ -40,13 +40,11 @@ gradle testDebugUnitTest
 gradle assembleDebug
 ```
 
-O endereço HTTPS da API será configurado em `API_BASE_URL` no build Android depois que a hospedagem estiver publicada. Até essa configuração e a integração da tela de conta/sincronização, o aplicativo não deve ser considerado online em produção.
+O workflow `.github/workflows/android-build.yml` executa testes do servidor, testes unitários Android e compilação do APK.
 
-## Princípios de engenharia
+## Integridade dos dados
 
-- Não declarar recursos concluídos sem implementação e teste.
-- Não sobrescrever saves desatualizados: conflitos precisam ser sincronizados.
-- Manter cache local para não perder alterações quando a conexão cair.
-- Fazer migrações aditivas no banco e preservar dados entre versões.
-- Não criar interação jogador-jogador.
-- Não usar eventos ou NPCs vazios/repetidos para fingir conteúdo.
+- Migrações aditivas; não apagar saves existentes.
+- Não sobrescrever saves desatualizados sem resolução de conflitos.
+- Manter o histórico de decisões.
+- Implementar NPCs e eventos com dados e regras reais, não placeholders apresentados como recursos prontos.
