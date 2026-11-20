@@ -1,5 +1,31 @@
 plugins { id 'com.android.application' }
 
+def bitlifeApiBaseUrl = (project.findProperty('BITLIFE_API_BASE_URL')
+        ?: System.getenv('BITLIFE_API_BASE_URL') ?: '').toString().trim().replaceAll('/+
+
+android {
+    namespace 'com.bitlifebr.game'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.bitlifebr.game'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        buildConfigField 'String', 'API_BASE_URL', '"' + escapedBitlifeApiBaseUrl + '"'
+    }
+    buildFeatures { buildConfig true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    testOptions { unitTests.returnDefaultValues = true }
+}
+dependencies { testImplementation 'junit:junit:4.13.2' }
+, '')
+def escapedBitlifeApiBaseUrl = bitlifeApiBaseUrl.replace('\\\\', '\\\\\\\\').replace('"', '\\\\"')
+
 android {
     namespace 'com.bitlifebr.game'
     compileSdk 35
