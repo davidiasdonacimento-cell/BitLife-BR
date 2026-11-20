@@ -5,6 +5,7 @@ import path from "node:path";
 import { Router } from "express";
 
 export const contentRouter = Router();
+let cachedHash = null;
 
 function unavailable(message = "O pacote de conteúdo ainda não foi publicado neste servidor.") {
   const error = new Error(message);
@@ -30,8 +31,18 @@ async function getPublishedPack() {
   let info;
   try { info = await stat(filePath); } catch { throw unavailable(); }
   if (!info.isFile() || info.size <= 0) throw unavailable();
+  if (info.size > 2 * 1024 * 1024 * 1024) throw unavailable("O pacote excede o limite de 2 GiB suportado pelo instalador Android.");
   const configuredHash = (process.env.CONTENT_PACK_SHA256 || "").trim().toLowerCase();
-  const sha256 = configuredHash || await hashFile(filePath);
+  const cacheKey = [filePath, info.size, info.mtimeMs, info.ino].join("|");
+  let sha256 = configuredHash;
+  if (!sha256) {
+    if (cachedHash && cachedHash.key === cacheKey) {
+      sha256 = cachedHash.value;
+    } else {
+      sha256 = await hashFile(filePath);
+      cachedHash = { key: cacheKey, value: sha256 };
+    }
+  }
   if (!/^[a-f0-9]{64}$/.test(sha256)) throw unavailable("A assinatura SHA-256 não está configurada corretamente.");
   return { filePath, sizeBytes: info.size, sha256,
     version: process.env.CONTENT_PACK_VERSION || "1.0.0",
