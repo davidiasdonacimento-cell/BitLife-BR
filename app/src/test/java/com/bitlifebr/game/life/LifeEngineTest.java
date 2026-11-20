@@ -14,9 +14,7 @@ public class LifeEngineTest {
                 "19/11/2026", "Feminino", "curioso", "BA", "Salvador",
                 false, "", "", 2, new Random(7));
         LifeEvent event = LifeEngine.createAnnualEvent(life);
-
         LifeState next = LifeEngine.applyChoice(life, event, event.choiceBId);
-
         assertEquals(1, next.age);
         assertTrue(next.happiness >= 0 && next.happiness <= 100);
         assertTrue(next.charisma >= 0 && next.charisma <= 100);
@@ -31,7 +29,6 @@ public class LifeEngineTest {
                 "19/11/2008", "Masculino", "disciplinado", "BA", "Salvador",
                 false, "", "", 0, new Random(1));
         life.age = 15;
-
         assertTrue(LifeEngine.createAnnualEvent(life).id.startsWith("teen_"));
     }
 
@@ -40,14 +37,12 @@ public class LifeEngineTest {
         LifeState life = LifeFactory.create("parent-life-id", "child", "Lara", "Santos",
                 "19/11/2026", "Feminino", "criativo", "BA", "Feira de Santana",
                 true, "Responsável Um", "Responsável Dois", 3, new Random(2));
-
         assertTrue(life.isDescendant());
         assertEquals("parent-life-id", life.parentLifeId);
         assertEquals(3, life.siblings.size());
         assertEquals("Responsável Um", life.fatherName);
         assertEquals("Responsável Dois", life.motherName);
     }
-
 
     @Test
     public void annualEventsHaveDifferentIdsAndTextForEachAge() {
@@ -72,7 +67,6 @@ public class LifeEngineTest {
         LifeEngine.applyChoice(afterFirstChoice, event, "family_time");
     }
 
-
     @Test
     public void thirdAnnualChoiceAdvancesAgeAndChangesAttributes() {
         LifeState life = LifeFactory.create(null, "create", "Caio", "Mendes",
@@ -80,9 +74,7 @@ public class LifeEngineTest {
                 false, "", "", 0, new Random(10));
         life.age = 26;
         LifeEvent event = LifeEngine.createAnnualEvent(life);
-
         LifeState next = LifeEngine.applyChoice(life, event, event.choiceCId);
-
         assertEquals(27, next.age);
         assertTrue(next.moneyCents >= life.moneyCents);
         assertEquals(26, life.age);
@@ -95,9 +87,7 @@ public class LifeEngineTest {
                 "19/11/2010", "Feminino", "criativo", "BA", "Salvador",
                 false, "", "", 0, new Random(11));
         life.age = 15;
-
         LifeState next = LifeEngine.applyActivity(life, "sports_group");
-
         assertEquals(15, next.age);
         assertTrue(next.health > life.health);
         assertTrue(next.history.size() > life.history.size());
@@ -137,12 +127,17 @@ public class LifeEngineTest {
                 false, "", "", 0, new Random(3));
         LifeEngine.applyChoice(life, LifeEngine.createAnnualEvent(life), "invalid_choice");
     }
+
     @Test
     public void expansionPackChoiceAppliesItsActualEffectValues() throws Exception {
         LifeState life = LifeFactory.create(null, "create", "Davi", "Silva",
                 "19/11/2000", "Masculino", "equilibrado", "BA", "Salvador",
                 false, "", "", 0, new Random(22));
         life.age = 26;
+        life.happiness = 40;
+        life.intelligence = 40;
+        life.charisma = 40;
+        life.popularity = 40;
         JSONObject effects = new JSONObject();
         effects.put("happiness", 4);
         effects.put("intelligence", 3);
@@ -151,13 +146,10 @@ public class LifeEngineTest {
                 "Teste de efeitos reais", "family_time", "Escolha A",
                 "rest", "Escolha B", "social_network", "Escolha C",
                 effects, new JSONObject(), new JSONObject());
-
         LifeState next = LifeEngine.applyChoice(life, event, event.choiceAId);
-
-        assertEquals(life.happiness + 4, next.happiness);
-        assertEquals(life.intelligence + 3, next.intelligence);
-        assertEquals(life.charisma + 2, next.charisma);
-        assertEquals(life.popularity + 2, next.popularity);
+        assertEquals(44, next.happiness);
+        assertEquals(43, next.intelligence);
+        assertEquals(42, next.charisma);
+        assertEquals(42, next.popularity);
     }
-
 }
