@@ -148,7 +148,7 @@ public final class LifeEngine {
     private static LifeState applyChoiceEffects(LifeState next, String id) {
         switch (id) {
             case "family_time": next.happiness += 3; next.health += 1; next.charisma += 1; break;
-            case "creative_play": next.happiness += 3; next.charisma += 2; break;
+            case "creative_play": next.happiness += 2; next.charisma += 2; break;
             case "rest": next.health += 3; next.happiness += 2; break;
             case "focus_study": case "study_group":
                 next.intelligence += 4; next.discipline += 2; next.happiness -= 1; break;
