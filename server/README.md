@@ -44,6 +44,6 @@ Rotas públicas:
 - `GET /api/content/manifest`: retorna versão, tamanho real em bytes, SHA-256 e URL do download.
 - `GET /api/content/download`: transmite o ZIP.
 
-O ZIP precisa ter no mínimo 500 MiB e no máximo 2 GiB, conter `manifest.json` na raiz, com `version` igual a `CONTENT_PACK_VERSION` e `schemaVersion` maior ou igual a 1. O servidor valida o tamanho real do arquivo e recusa pacotes menores; não existe preenchimento artificial de bytes. O app só instala depois de comparar tamanho, SHA-256 e versão interna e extrair arquivos sem permitir caminhos fora da pasta do jogo.
+O ZIP precisa ter no mínimo 800 MiB e no máximo 2 GiB, conter `manifest.json` na raiz, com `version` igual a `CONTENT_PACK_VERSION` e `schemaVersion` maior ou igual a 1. O servidor valida o tamanho real do arquivo e recusa pacotes menores; não existe preenchimento artificial de bytes. O app só instala depois de comparar tamanho, SHA-256 e versão interna e extrair arquivos sem permitir caminhos fora da pasta do jogo.
 
 **Não configure um tamanho fictício:** o manifesto usa o tamanho do arquivo realmente hospedado. Para publicar um pacote de 1 GiB, é necessário enviar os recursos reais para o volume persistente e configurar a assinatura correspondente.
