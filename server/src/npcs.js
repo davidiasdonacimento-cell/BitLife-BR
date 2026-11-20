@@ -1,9 +1,11 @@
+import { randomUUID } from "node:crypto";
+
 const firstNames = ["Ana","Bruno","Camila","Davi","Eduarda","Felipe","Giovana","Heitor","Isabela","João","Lara","Miguel","Nina","Pedro","Rafaela","Thiago"];
 const surnames = ["Almeida","Barbosa","Costa","Dias","Ferreira","Lima","Oliveira","Pereira","Ribeiro","Santos","Souza"];
 const cities = ["Salvador","Feira de Santana","São Paulo","Rio de Janeiro","Belo Horizonte","Recife","Curitiba","Manaus","Brasília","Fortaleza"];
 const pick = a => a[Math.floor(Math.random() * a.length)];
 export function createSessionNpcs() {
-  return Array.from({ length: 12 }, (_, i) => ({
+  return Array.from({ length: 12 }, () => ({
     id: randomUUID(),
     name: `${pick(firstNames)} ${pick(surnames)}`,
     age: 18 + Math.floor(Math.random() * 48),
