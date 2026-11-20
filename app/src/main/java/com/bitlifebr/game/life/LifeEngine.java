@@ -76,7 +76,18 @@ public final class LifeEngine {
         if (life == null) throw new IllegalArgumentException("Vida inválida.");
         int age = Math.max(0, Math.min(120, life.age));
         int stage = age < 6 ? 0 : age < 12 ? 1 : age < 18 ? 2 : age < 60 ? 3 : 4;
-        int slot = Math.floorMod(eventSeed(life) + age, SCENARIOS[stage].length);
+        int count = SCENARIOS[stage].length;
+        int firstSlot = Math.floorMod(eventSeed(life) + age, count);
+        int slot = firstSlot;
+        // Evita repetir os mesmos títulos dentro da fase de vida enquanto
+        // houver acontecimentos ainda não vistos no catálogo dessa fase.
+        for (int offset = 0; offset < count; offset++) {
+            int candidate = (firstSlot + offset) % count;
+            if (!wasScenarioUsedRecently(life, SCENARIOS[stage][candidate].title)) {
+                slot = candidate;
+                break;
+            }
+        }
         Scenario event = SCENARIOS[stage][slot];
         String city = life.city == null || life.city.trim().isEmpty() ? "sua cidade" : life.city;
         String description = event.story.replace("{{city}}", city)
@@ -91,6 +102,16 @@ public final class LifeEngine {
         String title = event.title + " • " + age + " anos";
         return new LifeEvent(life.id, age, eventId, title, description,
                 event.aId, event.aLabel, event.bId, event.bLabel, event.cId, event.cLabel);
+    }
+
+    private static boolean wasScenarioUsedRecently(LifeState life, String scenarioTitle) {
+        if (life.history == null || life.history.isEmpty()) return false;
+        int start = Math.max(0, life.history.size() - 32);
+        for (int i = start; i < life.history.size(); i++) {
+            String entry = life.history.get(i);
+            if (entry != null && entry.contains(scenarioTitle + " • ")) return true;
+        }
+        return false;
     }
 
     private static int eventSeed(LifeState life) {
