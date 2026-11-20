@@ -29,7 +29,7 @@ Consulte [docs/PLANEJAMENTO_COMPLETO.md](docs/PLANEJAMENTO_COMPLETO.md) para tod
 
 Consulte [server/README.md](server/README.md). Configure `DATABASE_URL` e `JWT_SECRET` no provedor de hospedagem. Nunca coloque segredos no Git.
 
-A API já possui uma base de autenticação, sessões isoladas, save com revisão e validação inicial de escolhas. O cliente Android ainda precisa de URL de produção, tela de conta e fluxo de sincronização antes que o jogo possa ser considerado online em produção.
+A API já possui uma base de autenticação, sessões isoladas, save com revisão, validação inicial de escolhas e rotas de manifesto/download do pacote Android. O manifesto só fica disponível quando um ZIP real está publicado no servidor. O cliente Android ainda precisa de URL de produção, tela de conta e fluxo de sincronização antes que o jogo possa ser considerado online em produção.
 
 ## Compilar e testar
 
@@ -38,6 +38,8 @@ Requisitos: JDK 17, Android SDK 35 e Gradle 8.9.
 ```bash
 gradle testDebugUnitTest
 gradle assembleDebug
+
+Para ligar a Central de Conteúdo a uma API publicada, compile com `-PBITLIFE_API_BASE_URL=https://seu-dominio-da-api`.
 ```
 
 O workflow `.github/workflows/android-build.yml` executa testes do servidor, testes unitários Android e compilação do APK.
