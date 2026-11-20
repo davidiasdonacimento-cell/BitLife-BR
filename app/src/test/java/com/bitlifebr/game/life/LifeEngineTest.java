@@ -147,7 +147,7 @@ public class LifeEngineTest {
                 "rest", "Escolha B", "social_network", "Escolha C",
                 effects, new JSONObject(), new JSONObject());
         LifeState next = LifeEngine.applyChoice(life, event, event.choiceAId);
-        assertEquals(44, next.happiness);
+        assertEquals("felicidade: esperado 44, recebido " + next.happiness, 44, next.happiness);
         assertEquals(43, next.intelligence);
         assertEquals(42, next.charisma);
         assertEquals(42, next.popularity);
