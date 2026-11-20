@@ -42,7 +42,8 @@ public final class ContentPackActivity extends Activity {
     private static final int BG=Color.rgb(10,16,31), PANEL=Color.rgb(23,33,54);
     private static final int ACCENT=Color.rgb(87,224,197), TEXT=Color.rgb(244,247,252);
     private static final int MUTED=Color.rgb(163,178,200);
-    private static final long MIN_PACK_BYTES=500L*1024L*1024L;\n    private static final long EXTRA_SPACE=96L*1024L*1024L, MAX_UNPACKED=3L*1024L*1024L*1024L;
+    private static final long MIN_PACK_BYTES=500L*1024L*1024L;
+    private static final long EXTRA_SPACE=96L*1024L*1024L, MAX_UNPACKED=3L*1024L*1024L*1024L;
     private final Handler handler=new Handler(Looper.getMainLooper());
     private DownloadManager manager;
     private TextView status,detail,percent,size,stage;
