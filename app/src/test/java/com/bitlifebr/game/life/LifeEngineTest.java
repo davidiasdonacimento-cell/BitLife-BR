@@ -47,6 +47,30 @@ public class LifeEngineTest {
         assertEquals("Responsável Dois", life.motherName);
     }
 
+
+    @Test
+    public void annualEventsHaveDifferentIdsAndTextForEachAge() {
+        LifeState life = LifeFactory.create(null, "create", "Bia", "Souza",
+                "19/11/2026", "Feminino", "curioso", "BA", "Salvador",
+                false, "", "", 0, new Random(8));
+        LifeEvent first = LifeEngine.createAnnualEvent(life);
+        life.age = 1;
+        LifeEvent second = LifeEngine.createAnnualEvent(life);
+        assertNotEquals(first.id, second.id);
+        assertNotEquals(first.title, second.title);
+        assertNotEquals(first.description, second.description);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void oldAnnualEventCannotAdvanceTheSameLifeTwice() {
+        LifeState life = LifeFactory.create(null, "create", "Caio", "Lima",
+                "19/11/2026", "Masculino", "equilibrado", "BA", "Salvador",
+                false, "", "", 0, new Random(9));
+        LifeEvent event = LifeEngine.createAnnualEvent(life);
+        LifeState afterFirstChoice = LifeEngine.applyChoice(life, event, "family_time");
+        LifeEngine.applyChoice(afterFirstChoice, event, "family_time");
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void eventRejectsChoiceFromAnotherEvent() {
         LifeState life = LifeFactory.create(null, "create", "João", "Dias",
