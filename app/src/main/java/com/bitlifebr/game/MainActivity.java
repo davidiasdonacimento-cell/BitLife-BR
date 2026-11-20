@@ -40,15 +40,15 @@ import java.util.Random;
  * atividades imediatas e acontecimentos anuais com três decisões.
  */
 public final class MainActivity extends Activity {
-    private static final int BG = Color.rgb(244, 246, 244);
+    private static final int BG = Color.rgb(242, 245, 241);
     private static final int PANEL = Color.rgb(255, 255, 255);
-    private static final int PANEL_ALT = Color.rgb(231, 239, 232);
-    private static final int TEXT = Color.rgb(31, 39, 33);
-    private static final int MUTED = Color.rgb(103, 113, 106);
-    private static final int GREEN = Color.rgb(48, 139, 82);
-    private static final int BLUE = Color.rgb(65, 119, 166);
-    private static final int PURPLE = Color.rgb(117, 98, 157);
-    private static final int ORANGE = Color.rgb(176, 119, 54);
+    private static final int PANEL_ALT = Color.rgb(226, 239, 227);
+    private static final int TEXT = Color.rgb(34, 40, 35);
+    private static final int MUTED = Color.rgb(105, 114, 106);
+    private static final int GREEN = Color.rgb(43, 125, 68);
+    private static final int BLUE = Color.rgb(67, 119, 153);
+    private static final int PURPLE = Color.rgb(116, 103, 143);
+    private static final int ORANGE = Color.rgb(166, 116, 55);
 
     private GameDatabase database;
     private LifeState currentLife;
@@ -180,7 +180,7 @@ public final class MainActivity extends Activity {
         if (currentLife == null) { showHome(); return; }
         LinearLayout root = screen("MINHA VIDA", "Suas decisões, seus resultados.");
         addProfileCard(root);
-        addSection(root, "SEUS ATRIBUTOS");
+        addSection(root, "ATRIBUTOS");
         addStat(root, " Saúde", currentLife.health, GREEN);
         addStat(root, " Felicidade", currentLife.happiness, ORANGE);
         addStat(root, " Inteligência", currentLife.intelligence, BLUE);
@@ -191,18 +191,18 @@ public final class MainActivity extends Activity {
         addCardText(root, " Dinheiro", formatMoney(currentLife.moneyCents),
                 currentLife.alive ? "Saldo atual da sua vida" : "A vida foi encerrada");
 
-        addSection(root, "O QUE VOCÊ QUER FAZER AGORA?");
+        addSection(root, "ATIVIDADES");
         addText(root, "Escolha uma atividade. Ela altera seus atributos e o histórico, mas não passa o ano.", 13, MUTED);
         for (QuickAction action : quickActions(currentLife)) {
             addChoiceCard(root, action.icon, action.title, action.description,
                     action.color, () -> performActivity(action.id));
         }
 
-        addSection(root, "ACONTECIMENTO DO PRÓXIMO ANO");
+        addSection(root, "PRÓXIMO ANO");
         addChoiceCard(root, "", "Um novo ano está esperando por você",
                 "Avance para receber um acontecimento da sua fase de vida e escolher entre três caminhos.",
                 GREEN, this::showAnnualEvent);
-        addSection(root, "FAMÍLIA E HISTÓRIA");
+        addSection(root, "SUA VIDA");
         addChoiceCard(root, "", "Minha família",
                 "Veja responsáveis, irmãos e vínculos da sua vida.", BLUE, this::showFamily);
         addChoiceCard(root, "", "Minha história",
@@ -220,8 +220,8 @@ public final class MainActivity extends Activity {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.HORIZONTAL);
         card.setGravity(Gravity.CENTER_VERTICAL);
-        card.setPadding(dp(16), dp(17), dp(16), dp(17));
-        card.setBackground(round(PANEL_ALT, 20));
+        card.setPadding(dp(15), dp(14), dp(15), dp(14));
+        card.setBackground(round(PANEL_ALT, 12));
         TextView avatar = text(avatarFor(currentLife), 36, TEXT);
         avatar.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams avatarParams = new LinearLayout.LayoutParams(dp(62), dp(62));
@@ -229,11 +229,11 @@ public final class MainActivity extends Activity {
         LinearLayout info = new LinearLayout(this);
         info.setOrientation(LinearLayout.VERTICAL);
         info.setPadding(dp(13), 0, 0, 0);
-        TextView name = text(currentLife.fullName(), 19, TEXT);
+        TextView name = text(currentLife.fullName(), 18, TEXT);
         name.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         info.addView(name, match());
-        info.addView(text(currentLife.age + " anos • " + ageStage(currentLife.age), 13, GREEN), match());
-        info.addView(text(" " + currentLife.city + " - " + currentLife.stateCode, 12, MUTED), match());
+        info.addView(text(currentLife.age + " anos  |  " + ageStage(currentLife.age), 13, GREEN), match());
+        info.addView(text(currentLife.city + " - " + currentLife.stateCode, 12, MUTED), match());
         card.addView(info, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         LinearLayout.LayoutParams params = match();
         params.bottomMargin = dp(12);
@@ -516,7 +516,7 @@ public final class MainActivity extends Activity {
     }
 
     private void addSection(LinearLayout root, String title) {
-        TextView label = text(title, 12, GREEN);
+        TextView label = text(title, 12, TEXT);
         label.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         label.setLetterSpacing(0.06f);
         label.setPadding(0, dp(17), 0, dp(8));
@@ -526,8 +526,8 @@ public final class MainActivity extends Activity {
     private void addStat(LinearLayout root, String label, int value, int color) {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.VERTICAL);
-        card.setPadding(dp(13), dp(10), dp(13), dp(10));
-        card.setBackground(round(PANEL, 12));
+        card.setPadding(dp(12), dp(9), dp(12), dp(9));
+        card.setBackground(round(PANEL, 10));
         LinearLayout line = new LinearLayout(this);
         line.setGravity(Gravity.CENTER_VERTICAL);
         TextView name = text(label, 13, TEXT);
@@ -552,7 +552,7 @@ public final class MainActivity extends Activity {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.VERTICAL);
         card.setPadding(dp(15), dp(14), dp(15), dp(14));
-        card.setBackground(round(PANEL, 15));
+        card.setBackground(round(PANEL, 11));
         TextView headline = text(title, 16, TEXT);
         headline.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         card.addView(headline, match());
@@ -574,7 +574,7 @@ public final class MainActivity extends Activity {
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.HORIZONTAL);
         card.setGravity(Gravity.CENTER_VERTICAL);
-        card.setPadding(dp(13), dp(13), dp(13), dp(13));
+        card.setPadding(dp(14), dp(12), dp(12), dp(12));
         card.setBackground(round(PANEL, 15));
         card.setClickable(true);
         card.setFocusable(true);
@@ -588,8 +588,8 @@ public final class MainActivity extends Activity {
 
         LinearLayout copy = new LinearLayout(this);
         copy.setOrientation(LinearLayout.VERTICAL);
-        copy.setPadding(dp(11), 0, dp(7), 0);
-        TextView headline = text(title, 15, TEXT);
+        copy.setPadding(icon == null || icon.trim().isEmpty() ? 0 : dp(10), 0, dp(7), 0);
+        TextView headline = text(title, 14, TEXT);
         headline.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         copy.addView(headline, match());
         TextView description = text(detail, 12, MUTED);
@@ -611,9 +611,9 @@ public final class MainActivity extends Activity {
         LinearLayout.LayoutParams params = match();
         params.bottomMargin = dp(8);
         root.addView(card, params);
-        long delay = Math.min(280L, root.getChildCount() * 24L);
+        long delay = Math.min(120L, root.getChildCount() * 10L);
         card.animate().alpha(1f).translationY(0f).setStartDelay(delay)
-                .setDuration(340L).start();
+                .setDuration(180L).start();
     }
 
     private void addButton(LinearLayout root, String label, Runnable action, boolean primary) {
@@ -623,7 +623,7 @@ public final class MainActivity extends Activity {
         button.setTextSize(14);
         button.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         button.setTextColor(primary ? Color.rgb(255, 255, 255) : TEXT);
-        button.setBackground(round(primary ? GREEN : PANEL_ALT, 14));
+        button.setBackground(round(primary ? GREEN : PANEL_ALT, 10));
         button.setPadding(dp(12), dp(8), dp(12), dp(8));
         button.setOnClickListener(v -> action.run());
         LinearLayout.LayoutParams params = match();
@@ -638,12 +638,12 @@ public final class MainActivity extends Activity {
         scroll.setBackgroundColor(BG);
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dp(18), dp(24), dp(18), dp(26));
-        TextView brand = text("VIDA BR   •   SIMULADOR DE VIDA", 10, GREEN);
+        root.setPadding(dp(16), dp(18), dp(16), dp(24));
+        TextView brand = text("BITLIFE BR  /  SIMULADOR DE VIDA", 10, GREEN);
         brand.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         brand.setLetterSpacing(0.10f);
         root.addView(brand, match());
-        TextView heading = text(title, 25, TEXT);
+        TextView heading = text(title, 23, TEXT);
         heading.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         heading.setPadding(0, dp(7), 0, 0);
         root.addView(heading, match());
@@ -651,7 +651,7 @@ public final class MainActivity extends Activity {
         heading.setTranslationY(dp(8));
         heading.animate().alpha(1f).translationY(0f).setDuration(420L).start();
         TextView sub = text(subtitle, 13, MUTED);
-        sub.setPadding(0, dp(4), 0, dp(14));
+        sub.setPadding(0, dp(4), 0, dp(12));
         root.addView(sub, match());
         scroll.addView(root);
         setContentView(scroll);
@@ -715,6 +715,7 @@ public final class MainActivity extends Activity {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(color);
         drawable.setCornerRadius(dp(radius));
+        drawable.setStroke(dp(1), Color.rgb(226, 231, 226));
         return drawable;
     }
 
