@@ -97,13 +97,8 @@ public final class LifeEngine {
         int hash = 17;
         hash = 31 * hash + (life.id == null ? 0 : life.id.hashCode());
         hash = 31 * hash + (life.city == null ? 0 : life.city.hashCode());
-        hash = 31 * hash + life.happiness / 10;
-        hash = 31 * hash + life.health / 10;
-        hash = 31 * hash + life.intelligence / 10;
-        hash = 31 * hash + life.charisma / 10;
-        hash = 31 * hash + life.discipline / 10;
         hash = 31 * hash + life.siblings.size();
-        hash = 31 * hash + (int) (life.moneyCents / 10000L);
+        hash = 31 * hash + (life.stateCode == null ? 0 : life.stateCode.hashCode());
         return hash ^ (hash >>> 16);
     }
 
