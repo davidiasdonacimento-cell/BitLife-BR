@@ -1,5 +1,7 @@
 package com.bitlifebr.game.life;
 
+import android.content.Context;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,6 +72,12 @@ public final class LifeEngine {
     private static Scenario s(String title, String story,
             String a, String al, String b, String bl, String c, String cl) {
         return new Scenario(title, story, a, al, b, bl, c, cl);
+    }
+
+    /** Prioriza o catálogo instalado pelo usuário; mantém os eventos internos como fallback. */
+    public static LifeEvent createAnnualEvent(Context context, LifeState life) {
+        LifeEvent installed = InstalledContentCatalog.createAnnualEvent(context, life);
+        return installed != null ? installed : createAnnualEvent(life);
     }
 
     public static LifeEvent createAnnualEvent(LifeState life) {
