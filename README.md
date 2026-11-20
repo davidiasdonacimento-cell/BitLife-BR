@@ -20,7 +20,7 @@ Na branch `feature/android-foundation-v1`, a primeira etapa inclui:
 - Geração ou personalização dos responsáveis e escolha da quantidade de irmãos.
 - Múltiplas vidas salvas localmente, com migração aditiva do save antigo.
 - Eventos anuais com duas escolhas, acontecimentos distintos por idade, efeitos nos atributos e bloqueio de avanço duplicado.
-- Central de Conteúdo Android com consulta ao manifesto, download real, barra baseada em bytes recebidos, verificação SHA-256 e extração segura do ZIP. O instalador exige pacote publicado de pelo menos 500 MiB e no máximo 2 GiB.
+- Central de Conteúdo Android com consulta ao manifesto, download real, barra baseada em bytes recebidos, verificação SHA-256 e extração segura do ZIP. O instalador exige pacote publicado de pelo menos 800 MiB e no máximo 2 GiB.
 
 ## Planejamento completo
 
